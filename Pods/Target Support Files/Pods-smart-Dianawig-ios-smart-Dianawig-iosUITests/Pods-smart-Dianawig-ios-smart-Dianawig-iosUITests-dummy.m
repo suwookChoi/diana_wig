@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests : NSObject
+@end
+@implementation PodsDummy_Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests
+@end

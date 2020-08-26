@@ -1,0 +1,588 @@
+<html lang="ko">
+<head>
+    <!--디자인팀 meta~link 정리함-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+    <script type="text/javascript" src="header.js"></script>
+    
+    <script>
+        var cardData = new Object();
+        
+        $(document).ready(function(){
+            $(".selectDate").change(function() {
+                getCheckList();
+            });
+            
+            $(document).on("click", ".dateRgBox", function(event) {
+                $(".dateRgBox").removeClass("on");
+                $(this).addClass("on");
+            });
+          window.webkit.messageHandlers.headerHtml.postMessage("reportCheckList");
+        });
+            
+        function headerHtml(menu,id,network_stat){
+            header_html("Check List",id,"Y");
+            $(".reportCheckList").parents().parents().children(".li button").css({"color": ""});
+            $(".reportCheckList").css({"color": "#d94a67"});
+        }
+
+        function getCheckList() {
+            var data = new Object();
+            data.cardCode = $("#cardCode").val();
+            data.startDate = $("#startDate").val();
+            data.endDate = $("#endDate").val();
+            
+            window.webkit.messageHandlers.CheckList.postMessage(data);
+        }
+    
+        function searchCustomerList() {
+            cardData.startDate = $("#startDate").val();
+            cardData.endDate = $("#endDate").val();
+            window.webkit.messageHandlers.moveCustomer.postMessage(JSON.stringify(cardData));
+        }
+    
+        function customerHtml(data) {
+            cardData = JSON.parse(data);
+            
+            $("#cardCode").val(cardData.cardCode);
+            $("#cardName").val(cardData.cardName);
+            $("#balance").val(cardData.cardBalance);
+            
+            if(cardData.startDate != null && cardData.endDate != null){
+                $("#startDate").val(cardData.startDate);
+                $("#endDate").val(cardData.endDate);
+            }
+            
+            getCheckList();
+        }
+    
+        function html(data, networkYN) {
+            $(".almWrap").remove();
+            if(networkYN == "N"){
+                var nwContext = "";
+                nwContext += "<div class='almWrap'>";
+                nwContext += "    <p>";
+                nwContext += "        <img src='ico_alarm.png' alt='Network connection failed'>";
+                nwContext += "        Network connection failed.<br>";
+                nwContext += "        (It can be different from the actual data.)";
+                nwContext += "    </p>";
+                nwContext += "</div>";
+                
+                $(".conWrap").prepend(nwContext);
+            }
+            
+            var list = JSON.parse(data.replaceAll('":null', '":""'));
+            
+            var context = "";
+            $.each(list, function(index, item) {
+                context += "<dl class='sdList'>";
+                context += "    <dt class='sdBtn'>";
+                context += "        <dl class='lstCon lft'>";
+                context += "            <dt>" + item.OrderNo + "</dt>";
+                context += "            <dd>" + item.OrderDate + "</dd>";
+                context += "        </dl>";
+                context += "        <dl class='lstCon rgt'>";
+                context += "            <dt>" + item.OrderAmtTot.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</dt>";
+                context += "            <dd>" + item.OrderQtyTot.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</dd>";
+                context += "        </dl>";
+                context += "    </dt>";
+                context += "    <dd class='sdCont'>";
+                context += "        <div class='tabMenu'>";
+                context += "            <div class='tabBtn'>";
+                context += "                <button class='btn active'>Order</button>";
+                context += "                <button class='btn'>Shipping</button>";
+                context += "                <button class='btn'>Billing</button>";
+                context += "            </div>";
+                context += "            <div class='tabCont'>";
+                context += "                <div class='cont active'>";
+                context += "                    <div class='tbWrap'>";
+                context += "                        <table>";
+                context += "                            <tr>";
+                context += "                                <th>Total Amt</th>";
+                context += "                                <th>Hair</th>";
+                context += "                                <th>G/M</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td>" + item.OrderAmtTot.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                                <td>" + item.OrderAmtHair.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                                <td>" + item.OrderAmtGM.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <th>Total Qty</th>";
+                context += "                                <th>Hair</th>";
+                context += "                                <th>G/M</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td>" + item.OrderQtyTot.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                                <td>" + item.OrderQtyHair.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                                <td>" + item.OrderQtyGM.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</td>";
+                context += "                            </tr>";
+                context += "                        </table>";
+                context += "                    </div>";
+                context += "                </div>";
+                context += "                <div class='cont'>";
+                context += "                    <div class='tbWrap'>";
+                context += "                        <table>";
+                context += "                            <tr>";
+                context += "                                <th>Print Send</th>";
+                context += "                                <th colspan='2'>WH Pickup</th>";
+                context += "                                <th>Dispatch</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td>" + item.PrintSend + "</td>";
+                context += "                                <td colspan='2'>" + item.WHPickup + "</td>";
+                context += "                                <td>" + item.Dispatch + "</td>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <th colspan='2'>Pickup Start</th>";
+                context += "                                <th colspan='2'>Pickup End</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td colspan='2'>" + item.PickupStart + "</td>";
+                context += "                                <td colspan='2'>" + item.PickupEnd + "</td>"
+                context += "                            </tr>";
+                context += "                        </table>";
+                context += "                    </div>";
+                context += "                </div>";
+                context += "                <div class='cont'>";
+                context += "                    <div class='tbWrap'>";
+                context += "                        <table>";
+                context += "                            <tr>";
+                context += "                                <th>No</th>";
+                context += "                                <th colspan='2'>Date</th>";
+                context += "                                <th>Amount</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td>" + item.BilNo + "</td>";
+                context += "                                <td colspan='2'>" + item.BilDate + "</td>";
+                context += "                                <td>" + (String(item.BilAmount) != "" ? (Math.floor(item.BilAmount*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <th>Box</th>";
+                context += "                                <th colspan='2'>Shipping Company</th>";
+                context += "                                <th>Term</th>";
+                context += "                            </tr>";
+                context += "                            <tr>";
+                context += "                                <td>" + item.BilBox + "</td>";
+                context += "                                <td colspan='2'>" + item.BilShipCp + "</td>";
+                context += "                                <td>" + item.BilTerm + "</td>";
+                context += "                            </tr>";
+                context += "                        </table>";
+                context += "                    </div>";
+                context += "                </div>";
+                context += "            </div>";
+                context += "        </div>";
+                context += "    </dd>";
+                context += "</dl>";
+                
+            });
+            
+            $("#itemUl").html(context);
+            
+            $('.sdBtn').click(function(){
+                var $this = $(this);
+                var $sdList = $this.parents('.sdList');
+                if( !$sdList.hasClass('sdOn') ){ //open
+                    $sdList.addClass('sdOn').find('.sdCont').slideDown(300);
+                    $sdList.siblings('.sdList').removeClass('sdOn').find('.sdCont').slideUp(300);
+                    $('.sdAll').removeClass('on');
+                }else{ //close
+                    $sdList.removeClass('sdOn').find('.sdCont').slideUp(300);
+                    $('.sdAll').removeClass('on');
+                }
+            });
+            
+            //* tabMenu *//
+            $('.tabBtn > .btn').click(function(){
+                var $this = $(this);
+                var idx = $this.index();
+                if ( $this.hasClass('active') ){
+                    return false;
+                } else {
+                    $this.addClass('active').siblings('.btn').removeClass('active');
+                    $this.parents('.tabMenu').children('.tabCont').children('.cont').eq(idx).fadeIn(100).addClass('active').siblings('.cont').fadeOut(100).removeClass('active');
+                }$('.tabMenu .tabBtn').width(tabBtnW * btnLgh);
+            });
+
+            //* tabMenu width *//
+            $('.tabMenu').each(function(){
+                var tabBtnW = $(this).find('.tabBtn .btn').width();
+                var btnLgh = $(this).find('.tabBtn .btn').length;
+                $(this).find('.tabBtn').width(tabBtnW * btnLgh);
+            });
+
+            //* .popDf *//
+            $('.popWrap .popBtn').click(function(){
+                if( $(this).hasClass('close') ) {
+                    $(this).parents('.popWrap').find('.popCont').fadeOut(100).removeClass('on tag');
+                    $('.fixBG').fadeOut(200);
+                } else {
+                    $(this).parents('.popWrap').find('.popCont').fadeIn(100).addClass('on tag');
+                    $('.fixBG').fadeIn(200);
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id='header' class='hdWrap'></div>
+    <section>
+        <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+        <div class="conWrap dateParent ept">
+            <form method="post" name="quotationForm" id="quotationForm">
+                <div class="schTbWrap">
+                    <table id="cardTable">
+                        <tr>
+                            <th>Customer</th>
+                            <td>
+                                <input type="text" name="cardCode" id="cardCode" class="ipt wtBtn" readonly="readonly" placeholder="Customer">
+                                <button type="button" class ="btnIptSch" onclick="javascript:searchCustomerList();">Search</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>
+                                <input type="text" name="cardName" id="cardName" class="ipt" readonly="readonly" placeholder="Name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <td>
+                                <div class="dateRgBox sg">
+                                    <input type="text" class="val selectDate" id="startDate" readonly="readonly">
+                                </div> ~
+                                <div class="dateRgBox sg"> <!--활성화시 class="on"추가-->
+                                    <input type="text" class="val selectDate" id="endDate" readonly="readonly">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <button class="allView sdAll"><span>All view</span></button>
+            <div id="itemUl" class="lstWrap check sdWrap">
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tabMenu">-->
+<!--                            <div class="tabBtn">-->
+<!--                                <button class="btn active">Order</button>-->
+<!--                                <button class="btn">Shipping</button>-->
+<!--                                <button class="btn">Billing</button>-->
+<!--                            </div>-->
+<!--                            <div class="tabCont">-->
+<!--                                <div class="cont active">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tabMenu">-->
+<!--                            <div class="tabBtn">-->
+<!--                                <button class="btn active">Order</button>-->
+<!--                                <button class="btn">Shipping</button>-->
+<!--                                <button class="btn">Billing</button>-->
+<!--                            </div>-->
+<!--                            <div class="tabCont">-->
+<!--                                <div class="cont active">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tabMenu">-->
+<!--                            <div class="tabBtn">-->
+<!--                                <button class="btn active">Order</button>-->
+<!--                                <button class="btn">Shipping</button>-->
+<!--                                <button class="btn">Billing</button>-->
+<!--                            </div>-->
+<!--                            <div class="tabCont">-->
+<!--                                <div class="cont active">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="cont">-->
+<!--                                    <div class="tbWrap">-->
+<!--                                        <table>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Amt</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td>686</td>-->
+<!--                                                <td></td>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <th>Total Qty</th>-->
+<!--                                                <th>Hair</th>-->
+<!--                                                <th>G/M</th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                                <td>27</td>-->
+<!--                                            </tr>-->
+<!--                                        </table>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+            </div>
+        </div>
+        <div class="fixBG"></div>
+    </section>
+</body>
+
+
+</html>

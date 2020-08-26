@@ -1,0 +1,89 @@
+<html lang="ko">
+    <head>
+        <!--디자인팀 meta~link 정리함-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+
+    </head>
+    <script>
+
+    function login(){
+       try{
+            var id = $("#textId").val();
+            var pass = $("#textPassword").val();
+            var check = $("input:checkbox[id='chk1']").is(":checked");
+            var data = {"id" : id, "pw" : pass , "check": check==true? "true":"false"};
+            
+            if(id == null || id == ""){
+                 showAlert("Notice","Please Check your ID.");
+            }else if(pass == null || pass == ""){
+                showAlert("Notice","Please Check your password.");
+            }else{
+                window.webkit.messageHandlers.loginCheck.postMessage(data);
+            }
+        }catch(e){
+            console.log(e);
+        }
+        
+    }
+    
+    function login_Fail(){
+        try{
+            showAlert("Notice","Please Check your ID/Password.");
+            return false;
+        }
+        catch(e){console.log(e)}
+    }
+        
+    </script>
+    <body class="logIn">
+       <section>
+            <div id="loginForm">
+                <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+                <div class="logWrap">
+                    <div class="logCont">
+                        <h1>DIANA WIG</h1>
+                        <div class="iptWrap">
+                            <div class="iptBox">
+                                <label for="textId">Username</label>
+                                <input type="text" id="textId" class="bk id" placeholder="Username">
+                            </div>
+                            <div class="iptBox">
+                                <label for="textPassword">Password</label>
+                                <input type="password" id="textPassword" maxlength="16" class="bk pw" placeholder="Password">
+                            </div>
+                            <div class="chkWrap keep">
+                                <div class="chkBox">
+                                    <input type="checkbox" id="chk1" class="ipt" name="checkGroup" value="체크안됨">
+                                    <label for="chk1">Keep me signed in</label>
+                                </div>
+                            </div>
+                            <div class="btnSign">
+                                <button id="btnLogin" class="btnPk" onclick="javascript:login()">Sign In</button>
+                            </div>
+                            <span id="resultText" style="color:red;"></span>
+                        </div>
+                    </div>
+                    <footer>
+                        <p>© 2020 Diana Enterprise USA. All Rights Reserved.</p>
+                    </footer>
+                </div>
+            </div>
+            <div class="fixBG"></div>
+        </section>
+    </body>
+
+</html>

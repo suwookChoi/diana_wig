@@ -1,0 +1,274 @@
+<html lang="ko">
+    <head>
+        <!--디자인팀 meta~link 정리함-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="webfont.css"/>
+        <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="common.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="jquery-ui.js"></script>
+        <script type="text/javascript" src="moment.min.js"></script>
+        <script type="text/javascript" src="daterangepicker.js"></script>
+        <script type="text/javascript" src="common.js"></script>
+        <script type="text/javascript" src="style.js"></script>
+        <script type="text/javascript" src="header.js"></script>
+    </head>
+    <script>
+    var selectCard = new Object();
+    var selectItemList = new Array();
+    var selectOldList = new Array();
+    var src_word = new Object();
+    var network = ""
+    var type = "";
+    $(document).ready(function(){
+        
+        init();
+        $(document).on("click", ".back", function(event) {
+            if(type == "selected"){
+               var data = {"selectItem":selectOldList};
+               window.webkit.messageHandlers.gobackPage.postMessage(data);
+               
+            }else{
+                window.history.back();
+            }
+        });
+            
+        $(document).on("click", ".deleteBtn", function(event) {
+            
+            var deleteCode = $(this).attr("code");
+            
+            $.each(selectItemList, function(index, item) {
+                    if(item.itemCode == deleteCode){
+                        selectItemList.splice(index,1);
+                        html(selectItemList);
+                    }
+                });
+            });
+        window.webkit.messageHandlers.headerHtml.postMessage("createQuotation");
+      });
+          
+      function headerHtml(menu,id,network_stat){
+          header_html("Selected Item List",id,"N");
+          $(".createQuotation").parents().parents().children(".li button").css({"color": ""});
+          $(".createQuotation").css({"color": "#d94a67"});
+          network = network_stat;
+      }
+    
+    function init(){
+       var data={
+             "funcNM" : "setPageData",
+             "pageNM" : "createQuotationSelectItem"
+         }
+       window.webkit.messageHandlers.selectItemPageInit.postMessage(data);
+    }
+    
+    function deleteQu(id){
+        
+        var befQuantity = $("#"+id).val();
+        var aftQuantity = 0;
+        var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+        var code = $("#val_"+id).val();
+        var itemPrice = 0;
+        var price = "";
+        var totPrice = 0;
+        
+        if(befQuantity > 1) {
+          aftQuantity = befQuantity - 1;
+        }
+        
+        $.each(selectItemList, function(index, item) {
+            itemPrice = Number(item.itemPrice.replace(regExp,""));
+            
+            if(item.itemCode == code){
+                item.selectedQt = aftQuantity;
+                $("#"+id).parent().parent().parent().children().children(".itemTotPrice").text((Math.floor((aftQuantity * parseFloat(itemPrice))*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+             
+             totPrice += Number(item.selectedQt) * itemPrice;
+             
+        });
+
+        $("#"+id).val(aftQuantity);
+        $(this).next().val(aftQuantity);
+                
+        var itemTotPrice = (Number(itemPrice) * aftQuantity).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        $(this).parent().parent().children().children(".itemTotPrice").text(itemTotPrice + " $");
+
+        $("#totPrice").text(totPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+        
+        var discount = totPrice * Number($("#discountPer").text());
+        $("#discount").text(discount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+
+        $("#tot").text((totPrice - discount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+    }
+    
+    function addQtt(id,qtt){
+      var befQuantity = Number($("#"+id).val());
+      var aftQuantity = 0;
+      var code = $("#val_"+id+"").val();
+      var totPrice = 0;
+      var price = "";
+      var itemPrice = 0;
+      var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+       
+      if( befQuantity < qtt) {
+       
+        aftQuantity = befQuantity + 1;
+      }
+      $.each(selectItemList, function(index, item) {
+            price = item.itemPrice.replace(regExp,"");
+
+            if(item.itemCode == code){
+                //item.quantity = aftQuantity;
+                item.selectedQt = aftQuantity;
+                itemPrice = Number(price);
+                $("#"+id).parent().parent().parent().children().children(".itemTotPrice").text((Math.floor((aftQuantity * parseFloat(itemPrice))*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                
+            }
+            totPrice += Number(item.selectedQt) * Number(price);
+        });
+       
+       $("#"+id).val(aftQuantity);
+      
+       var itemTotPrice = (Math.floor((aftQuantity * parseFloat(itemPrice))*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+         
+       $(this).parent().parent().children().children(".itemTotPrice").text(itemTotPrice + " $");
+       $("#totPrice").text(totPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+       var discount = totPrice * Number($("#discountPer").text());
+       $("#discount").text(discount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+
+       $("#tot").text((totPrice - discount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+       
+    }
+                           
+    function html(list){
+        var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\" ]/gi;
+        var context = "";
+        var totPrice = 0;
+        var price = 0;
+        var currency = "";
+        
+        selectItemList = [];
+        
+        $.each(list,function(index,item){
+            var quantity = 0;
+            if (item.selectedQt == "" || item.selectedQt == null){quantity = 0;} else { quantity = item.selectedQt; }
+            
+            var itemId = item.itemCode.replace(regExp,"");
+            price = item.itemPrice.replace(regExp,"");
+            
+            if (price.length != item.itemPrice.length) {currency = item.itemPrice.substr(price.length,1);}else{currency = item.currency;}
+
+            var obj = {"itemCode":item.itemCode,"itemPrice":item.itemPrice.replace(regExp,""),"quantity":item.quantity,"selectedQt":quantity,"currency":currency};
+             
+             context += '            <li> ';
+             context += '                <dl class="lstCon lft"> ';
+             context += '                   <dt class="titEm"><span>'+item.itemCode+'</span></dt> ';
+             context += '                   <dd class="numSlt"> ';
+             context += '                       <button class="btn_minus" onclick="javascript:deleteQu(\''+itemId+index+'\')">-</button> ';
+             context += '                       <input type="text" id="'+itemId+index+'" class="iptNum itemQ" code="' + item.itemCode + '" value="'+quantity+'"> ';
+             context += '                       <input type="hidden" id="val_'+itemId+index+'" class="itemCode" value="'+item.itemCode+'"> ';
+             context += '                       <button class="btn_plus qtPlus" onclick="javascript:addQtt(\''+itemId+index+'\',\''+item.quantity+'\')">+</button> ';
+             context += '                   </dd> ';
+             context += '                </dl> ';
+             context += '                <dl class="lstCon rgt"> ';
+             context += '                   <dt class="itemPrice">'+item.itemPrice.replace(regExp,"")+currency+'</dt> ';
+             context += '                   <dd class="itemTotPrice">'+ (Math.floor((Number(quantity) * Number(price))*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + currency +'</dd> ';
+             context += '                </dl> ';
+             context += '                <button class="btnDel deleteBtn" code="' + item.itemCode + '" >delate</button> ';
+             context += '            </li> ';
+             
+             totPrice += (Math.floor((Number(quantity) * Number(price))*100)/100);
+             selectItemList.push(obj);
+             
+         });
+                                                                   
+         $("#itemUl").html(context);
+         
+         $("#totPrice").text(totPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + currency);
+
+         var discount = totPrice * Number($("#discountPer").text());
+         $("#discount").text(discount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + currency);
+
+         $("#tot").text((totPrice - discount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + currency);
+    }
+    
+    function selectSetPage(data,type_page){
+        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+        var context = "";
+        var totPrice = 0;
+        var list = new Array();
+        var price = 0;
+        selectOldList = JSON.parse(data);
+        list = JSON.parse(data);
+        type = type_page;
+        html(list);
+    }
+    
+    function done() {
+        try {
+            var cnt =0;
+            if (selectItemList.length == 0){
+                showAlert("Notice","Please, Check the item list");
+                return;
+            }else{
+                $.each(selectItemList, function(index, item) {
+                     if (item.selectedQt == 0){
+                         cnt ++;
+                     }
+                 });
+                if(cnt == 0){
+                    var data = {"selectItem":selectItemList};
+                    window.webkit.messageHandlers.selectItemDone.postMessage(data);
+                }else{
+                 showAlert("Notice","Please, Check Selected Item count");
+                 return;
+                }
+            }
+        }catch (e) {}
+        window.close();
+    }
+</script>
+<body>
+        <div id='header' class='hdWrap'></div>
+        <section>
+            <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+            <div class="conWrap">
+                <div class="sltItemWrap">
+                    <ul id="itemUl" class="lstWrap"></ul>
+                </div>
+                <div class="dtlWrap">
+                    <dl>
+                        <dt>Total Before Discount</dt>
+                        <dd id="totPrice"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Discount %</dt>
+                        <dd id="discountPer"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Discount</dt>
+                        <dd id="discount"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Tax</dt>
+                        <dd id="tax"></dd>
+                    </dl>
+                    <dl class="Total">
+                        <dt>Total</dt>
+                        <dd id="tot"></dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="btnWrap">
+                <button type="button" class="btnDn" onclick="javascript:done()">Done</button>
+            </div>
+            <div class="fixBG"></div>
+        </section>
+    </body>
+</html>

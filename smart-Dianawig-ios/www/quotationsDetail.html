@@ -1,0 +1,184 @@
+<html lang="ko">
+<head>
+    <!--디자인팀 meta~link 정리함-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+    <script type="text/javascript" src="header.js"></script>
+    
+    <script>
+       $(document).ready(function(){
+           window.webkit.messageHandlers.quotationDetail.postMessage("");
+           
+           $(document).on("click", ".back", function(event) {
+               window.webkit.messageHandlers.close.postMessage("");
+           });
+           
+           window.webkit.messageHandlers.headerHtml.postMessage("quotations");
+       });
+           
+       function headerHtml(menu,id){
+           header_html("Quotations Detail",id,"N");
+           $(".quotations").parents().parents().children(".li button").css({"color": ""});
+           $(".quotations").css({"color": "#d94a67"});
+       }
+
+       function html(data) {
+           var detailData = JSON.parse(data.replaceAll('":null', '":""'));
+           
+           if(detailData.NETWORK == "N"){
+               var nwContext = "";
+               nwContext += "<div class='almWrap'>";
+               nwContext += "    <p>";
+               nwContext += "        <img src='ico_alarm.png' alt='Network connection failed'>";
+               nwContext += "        Network connection failed.<br>";
+               nwContext += "        (It can be different from the actual data.)";
+               nwContext += "    </p>";
+               nwContext += "</div>";
+               
+               $(".conWrap").prepend(nwContext);
+           }
+           
+           $("#No").text(detailData.DocEntry);
+           $("#Status").text(detailData.Status);
+    <!--        $("#PostingDate").text(detailData.);-->
+    <!--        $("#ValidUnti").text(detailData.);-->
+           $("#DocumentDate").text(detailData.DocDate);
+           $("#SalesEmployee").text(detailData.SlpName);
+           $("#Customer").text(detailData.CardCode);
+           $("#Name").text(detailData.CardName);
+    <!--        $("#ContactPerson").text(detailData.);-->
+    <!--        $("#CustomerRefNo").text(detailData.);-->
+           $("#ItemsCnt").text(detailData.Item.length + " Items");
+
+           var currency = detailData.Currency;
+           var totPrice = Number(detailData.PaidSum);
+           $("#totPrice").text((Math.floor(totPrice*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + currency);
+
+           var discountPer = Number(detailData.DiscountPer);
+           $("#discountPer").text(discountPer);
+
+           var discount = totPrice * (discountPer/100);
+
+           $("#discount").text((Math.floor(discount*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + currency);
+           $("#tot").text((Math.floor((totPrice - discount)*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + currency);
+       }
+        
+       function detailItem(){
+           window.webkit.messageHandlers.moveQuotationsDetailItem.postMessage("");
+       }
+   </script>
+</head>
+
+<body>
+    <div id='header' class='hdWrap'></div>
+    <section>
+        <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+        <div id="quotationDetailList">
+            <div class="conWrap ept">
+<!--                <div class="almWrap">-->
+<!--                    <p>-->
+<!--                        <img src="ico_alarm.png" alt="Network connection failed">-->
+<!--                        Network connection failed.<br>-->
+<!--                        (It can be different from the actual data.)-->
+<!--                    </p>-->
+<!--                </div>-->
+                <div class="dtTbWrap dvLine">
+                    <table class="Dttable">
+                        <tr>
+                            <td class="lgt">No.</td>
+                            <td class="rgt" id="No"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Status</td>
+                            <td class="rgt" id="Status"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Posting Date</td>
+                            <td class="rgt" id="PostingDate"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Valid Until</td>
+                            <td class="rgt" id="ValidUnti"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Document Date</td>
+                            <td class="td rgt" id="DocumentDate"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Sales Employee</td>
+                            <td class="rgt" id="SalesEmployee"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="dtTbWrap dvLine">
+                    <table class="Dttable">
+                        <tr>
+                            <td class="lgt">Customer</td>
+                            <td class="rgt" id="Customer"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Name</td>
+                            <td class="rgt" id="Name"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Contact Person</td>
+                            <td class="rgt" id="ContactPerson"></td>
+                        </tr>
+                        <tr>
+                            <td class="lgt">Customer Ref. No.</td>
+                            <td class="rgt" id="CustomerRefNo"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="dtTbWrap dvLine">
+                    <table class="Dttable">
+                        <tr class="tbItems">
+                            <td class="lgt" id="ItemsCnt"></td>
+                            <td class="rgt" onclick="javascript:detailItem()"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="dtlWrap">
+                    <dl>
+                        <dt>Total Before Discount</dt>
+                        <dd id="totPrice"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Discount %</dt>
+                        <dd id="discountPer"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Discount</dt>
+                        <dd id="discount"></dd>
+                    </dl>
+                    <dl>
+                        <dt>Tax</dt>
+                        <dd id="tax">0.00 $</dd>
+                    </dl>
+                    <dl class="Total">
+                        <dt>Total</dt>
+                        <dd id="tot"></dd>
+                    </dl>
+                </div>
+            </div>
+<!--            <div class="btnWrap">-->
+<!--                <button class="btnDn">Done</button>-->
+<!--            </div>-->
+        </div>
+        <div class="fixBG"></div>
+    </section>
+</body>
+</html>

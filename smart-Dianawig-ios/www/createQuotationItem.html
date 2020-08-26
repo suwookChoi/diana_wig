@@ -1,0 +1,188 @@
+<html lang="ko">
+    <head>
+        <!--디자인팀 meta~link 정리함-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="webfont.css"/>
+        <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="common.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="jquery-ui.js"></script>
+        <script type="text/javascript" src="moment.min.js"></script>
+        <script type="text/javascript" src="daterangepicker.js"></script>
+        <script type="text/javascript" src="common.js"></script>
+        <script type="text/javascript" src="style.js"></script>
+        <script type="text/javascript" src="header.js"></script>
+    </head>
+
+    <script>
+        var selectCard = new Object();
+        var selectItemList = new Array();
+        var selectOldList = new Array();
+        var sch_word = "";
+        var body = new Object();
+        var network = "";
+        $(document).ready(function(){
+            //Header
+            window.resizeTo(
+                            window.screen.availWidth / 2,
+                            window.screen.availHeight / 2);
+            window.webkit.messageHandlers.headerHtml.postMessage("createQuotation");
+            
+            init();
+            
+            //Item  클릭 이벤트
+            $(document).on("click", "#itemUl li", function(event) {
+                //$(document).off("click", "#itemUl li").on("click", "#itemUl li", function(event) {
+                var selectItem = new Object();
+                
+                if($(this).children().children(".itemName").text() == 'undefied' || $(this).children().children(".itemName").text() == '' || $(this).children().children(".itemName").text() == null){}
+                else{
+                    selectItem.itemCode = $(this).children().children(".itemCode").text();
+                    selectItem.itemPrice = $(this).children().children(".itemP").text();
+                    selectItem.quantity = $(this).children().children(".onHand").text();
+
+                    if(selectItemList != null){
+                        $.each(selectItemList, function(index, item) {
+                            if(item.itemCode == selectItem.itemCode){
+                                selectItemList.splice(index,1);
+                                return false;
+                             }
+                        });
+                    }
+
+                    if($(this).hasClass("on") === true) {
+                        $(this).removeClass("on");
+                    }else{
+                        selectItemList.push(selectItem);
+                        $(this).addClass("on");
+                    }
+            }
+        });
+          $(document).off("click", ".back").on("click", ".back", function(event) {
+              var data = {"selectItem":selectOldList};
+              window.webkit.messageHandlers.gobackPage.postMessage(data);
+          });
+            
+    });
+        
+    function headerHtml(menu,id,network_stat){
+        header_html("Select Item List",id,"N");
+        $(".createQuotation").parents().parents().children(".li button").css({"color": ""});
+        $(".createQuotation").css({"color": "#d94a67"});
+        network = network_stat;
+    }
+    
+    function init(){
+         //Item List 가져오기
+         var data = {"funcNM":"SelectItemList"}
+         window.webkit.messageHandlers.SelectItemList.postMessage(data);
+    }
+    
+    function done(){
+       var data={
+           "selectItemList":JSON.stringify(selectItemList),
+           "type":"new"
+       };
+       window.webkit.messageHandlers.selectItemPage.postMessage(data);
+    }
+    function html(data,message,searchWD){
+        var list = JSON.parse(data);
+        var context = "";
+        sch_word = searchWD;
+//        body = JSON.parse(message);
+        
+        if(network == "false"){
+               context += " <p>";
+                   context += " <img src='ico_alarm.png' alt='Network connection failed'>";
+                   context += " Network connection failed.<br>";
+                   context += "(It can be different from the actual data.)";
+               context += " </p>";
+           }
+
+           $(".almWrap").html(context);
+           context = "";
+        $.each(list, function(index, item) {
+            var cur = item.LastPurCur == null ? "" : item.LastPurCur;
+            var price = item.LastPurPrc == null ? 0 : item.LastPurPrc;
+            
+            context += '<li>';
+            context += '    <dl class="lstCon lft">';
+            context += '        <dt class="itemCode">' + item.ItemCode +'</dt>';
+            context += '        <dd class="itemName">'+ item.ItemName +'</dd>';
+            context += '    </dl>';
+            context += '    <dl class="lstCon rgt">';
+            context += '        <dt class="itemP">'+price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + cur +'</dt>'
+            context += '        <dd class="onHand">'+ item.OnHand +'</dd>'
+            context += '    </dl>';
+            context += '</li>                                      ';
+
+        });
+            $("#itemUl").append(context);
+            $('#findText').val(searchWD);
+            if($('#findText').val() != 'undefined') searchItemList();
+            
+    }
+    
+    function searchItemList(){
+        var input = $('#findText').val();
+        var filter = input.toUpperCase();
+
+        $("#itemUl>li").each(function(index){
+            var itemLi = $(this);
+
+            var itemCode = itemLi.children().children().eq(0);
+            var itemPrice = itemLi.children().children().eq(1);
+            var itemName = itemLi.children().children().eq(2);
+            var stockValue = itemLi.children().children().eq(3);
+
+            if(itemCode || itemPrice || itemName || stockValue){
+                var codeValue = itemCode.text();
+                var priceValue = itemPrice.text();
+                var nameValue = itemName.text();
+                var stokeValue = stockValue.text();
+
+                if(codeValue.toUpperCase().indexOf(filter) > -1 || priceValue.toUpperCase().indexOf(filter) > -1) {
+                    itemLi.attr('style','display:"";');
+                    itemLi.next().attr('style','display:"";');
+                } else if(nameValue.toUpperCase().indexOf(filter) > -1 || stokeValue.toUpperCase().indexOf(filter) > -1) {
+                    itemLi.attr('style','display:"";');
+                    itemLi.next().attr('style','display:"";');
+                } else {
+                    itemLi.attr('style','display:none;');
+                    itemLi.next().attr('style','display:none;');
+                }
+            }
+        });
+    }
+    
+    </script>
+    <body>
+       <div id='header' class='hdWrap'></div>
+       <section>
+       <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+        <div class="schWrap" id="searchDiv">
+            <input type="text" id="findText" name="search" placeholder="Search...">
+            <button onclick="javascript:searchItemList();" class="btnSch">serch</button>
+        </div>
+        <div class="conWrap sbWrap">
+            <div class="almWrap">
+<!--                <p>-->
+<!--                    <img src="ico_alarm.png" alt="Network connection failed">-->
+<!--                    Network connection failed.<br>-->
+<!--                    (It can be different from the actual data.)-->
+<!--                </p>-->
+            </div>
+            <ul id="itemUl" class="lstWrap"></ul>
+        </div>
+        <div class="fixBG"></div>
+        <div class="btnWrap">
+            <button class="btnDn" onclick="javascript:done()">Done</button>
+       </div>       
+    </section>
+    </body>
+</html>

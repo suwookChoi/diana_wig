@@ -1,0 +1,20 @@
+PODS:
+  - SQLClient (1.0.0)
+  - SQLite (0.1.17)
+
+DEPENDENCIES:
+  - SQLClient
+  - SQLite
+
+SPEC REPOS:
+  trunk:
+    - SQLClient
+    - SQLite
+
+SPEC CHECKSUMS:
+  SQLClient: 262f95dad0467f173bbca5a7cb4fdcaa6c08affd
+  SQLite: fb71d10293cab804bcb1c40c66ff61e35b40de69
+
+PODFILE CHECKSUM: cc6dd26826b561c7051bdec983cf19301b097872
+
+COCOAPODS: 1.9.3

@@ -1,0 +1,606 @@
+<html lang="ko">
+<head>
+    <!--디자인팀 meta~link 정리함-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+    <script type="text/javascript" src="header.js"></script>
+    
+    <script>
+        var cardData = new Object();
+        
+        $(document).ready(function(){
+          window.webkit.messageHandlers.headerHtml.postMessage("reportARLedger");
+          
+            $(".selectDate").change(function() {
+                getARLedger();
+            });
+            
+            $(document).on("click", ".dateRgBox", function(event) {
+                $(".dateRgBox").removeClass("on");
+                $(this).addClass("on");
+            });
+          
+        });
+            
+        function headerHtml(menu,id,network_stat){
+            header_html("A/R Ledger",id,"Y");
+            $(".reportARLedger").parents().parents().children(".li button").css({"color": ""});
+            $(".reportARLedger").css({"color": "#d94a67"});
+        }
+
+        function getARLedger() {
+            var data = new Object();
+            data.cardCode = $("#cardCode").val();
+            data.startDate = $("#startDate").val();
+            data.endDate = $("#endDate").val();
+            
+            window.webkit.messageHandlers.ARLedgerList.postMessage(data);
+        }
+    
+        function searchCustomerList() {
+            cardData.startDate = $("#startDate").val();
+            cardData.endDate = $("#endDate").val();
+            window.webkit.messageHandlers.moveCustomer.postMessage(JSON.stringify(cardData));
+        }
+    
+        function customerHtml(data) {
+            cardData = JSON.parse(data);
+            
+            $("#cardCode").val(cardData.cardCode);
+            $("#cardName").val(cardData.cardName);
+            $("#balance").val(cardData.cardBalance);
+            
+            if(cardData.startDate != null && cardData.endDate != null){
+                $("#startDate").val(cardData.startDate);
+                $("#endDate").val(cardData.endDate);
+            }
+            
+            getARLedger();
+        }
+    
+        function html(data, networkYN) {
+            $(".almWrap").remove();
+            if(networkYN == "N"){
+                var nwContext = "";
+                nwContext += "<div class='almWrap'>";
+                nwContext += "    <p>";
+                nwContext += "        <img src='ico_alarm.png' alt='Network connection failed'>";
+                nwContext += "        Network connection failed.<br>";
+                nwContext += "        (It can be different from the actual data.)";
+                nwContext += "    </p>";
+                nwContext += "</div>";
+                
+                $(".conWrap").prepend(nwContext);
+            }
+            
+            var list = JSON.parse(data.replaceAll('":null', '":""'));
+            
+            var context = "";
+            $.each(list, function(index, item) {
+                
+                if(item.GB == "INV") {
+                    context += "<dl class='sdList'>";
+                    context += "    <dt class='sdBtn'>";
+                    context += "        <dl class='lstCon lft'>";
+                    context += "            <dt>" + item.INV + "</dt>";
+                    context += "            <dd>" + item.DocDate + "</dd>";
+                    context += "        </dl>";
+                    context += "        <dl class='lstCon rgt'>";
+                    context += "            <dt>" + (String(item.Amount) != "" ? (Math.floor(item.Amount*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</dt>";
+                    context += "            <dd>" + (String(item.LastBalance) != "" ? (Math.floor(item.LastBalance*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</dd>";
+                    context += "        </dl>";
+                    context += "    </dt>";
+                    context += "    <dd class='sdCont'>";
+                    context += "        <div class='tbWrap'>";
+                    context += "            <table>";
+                    context += "                <tr>";
+                    context += "                    <td rowspan='4' class='tcBlue'>" + item.GB + "</td>";
+                    context += "                    <th>Term</th>";
+                    context += "                    <th>Amount</th>";
+                    context += "                    <th>Balance</th>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <td>" + item.Term + "</td>";
+                    context += "                    <td>" + (String(item.Amount) != "" ? (Math.floor(item.Amount*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                    context += "                    <td>" + (String(item.Balance) != "" ? (Math.floor(item.Balance*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <th colspan='3'>Remarks</th>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <td colspan='3'>" + item.Remarks1 + " " + item.Remarks2 + "</td>";
+                    context += "                </tr>";
+                    context += "            </table>";
+                }
+                
+                if(item.GB == "RCV") {
+                    context += "            <table>";
+                    context += "                <tr>";
+                    context += "                    <td rowspan='6' class='tcRed'>" + item.GB + "</td>";
+                    context += "                    <th>Amount</th>";
+                    context += "                    <th>Paid</th>";
+                    context += "                    <th>Balance</th>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <td>" + (String(item.Amount) != "" ? (Math.floor(item.Amount*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                    context += "                    <td>" + (String(item.Paid) != "" ? (Math.floor(item.Paid*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                    context += "                    <td>" + (String(item.Balance) != "" ? (Math.floor(item.Balance*100)/100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "") + "</td>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <th>Date</th>";
+                    context += "                    <th colspan='2'>I.P#</th>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <td>" + item.DocDate + "</td>";
+                    context += "                    <td colspan='2'>" + item.IP1 + " " + item.IP2 + "</td>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <th colspan='3'>Remarks</th>";
+                    context += "                </tr>";
+                    context += "                <tr>";
+                    context += "                    <td colspan='3'>" + item.Remarks1 + " " + item.Remarks2 + "</td>";
+                    context += "                </tr>";
+                    context += "            </table>";
+                }
+                // 다음행의 gb가 inv이거나 없거나(마지막행이거나)
+                if((list[index+1] != null && list[index+1].GB == "INV") || list.length == index+1){
+                    context += "        </div>";
+                    context += "    </dd>";
+                    context += "</dl>";
+                }
+                
+            });
+            
+            $("#data").html(context);
+            
+            $('.sdBtn').click(function(){
+                var $this = $(this);
+                var $sdList = $this.parents('.sdList');
+                if( !$sdList.hasClass('sdOn') ){ //open
+                    $sdList.addClass('sdOn').find('.sdCont').slideDown(300);
+                    $sdList.siblings('.sdList').removeClass('sdOn').find('.sdCont').slideUp(300);
+                    $('.sdAll').removeClass('on');
+                }else{ //close
+                    $sdList.removeClass('sdOn').find('.sdCont').slideUp(300);
+                    $('.sdAll').removeClass('on');
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id='header' class='hdWrap'></div>
+    <section>
+        <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+        <div class="conWrap dateParent ept">
+            <form method="post" name="quotationForm" id="quotationForm">
+                <div class="schTbWrap">
+                <table id="cardTable">
+                    <tr>
+                        <th>Customer</th>
+                        <td>
+                            <input type="text" class="ipt wtBtn" name="cardCode" id="cardCode" readonly="readonly" placeholder="Customer">
+                            <button type="button" class ="btnIptSch" onclick="javascript:searchCustomerList();">Search</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>
+                            <input type="text" name="cardName" id="cardName" class="ipt" readonly="readonly" placeholder="Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Balance</th>
+                        <td>
+                            <input type="text" name="balance" id="balance" class="ipt" readonly="readonly" placeholder="Balance">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>
+                            <div class="dateRgBox sg">
+                                <input type="text" class="val selectDate" id="startDate" readonly="readonly">
+                            </div> ~
+                            <div class="dateRgBox sg"> <!--활성화시 class="on"추가-->
+                                <input type="text" class="val selectDate" id="endDate" readonly="readonly">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <button class="allView sdAll"><span>All view</span></button>
+            <div id="data" class="lstWrap color sdWrap">
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+<!--                <dl class="sdList">-->
+<!--                    <dt class="sdBtn">-->
+<!--                        <dl class="lstCon lft">-->
+<!--                            <dt>271210</dt>-->
+<!--                            <dd>04/08/2020</dd>-->
+<!--                        </dl>-->
+<!--                        <dl class="lstCon rgt">-->
+<!--                            <dt>685.73 $</dt>-->
+<!--                            <dd>0.00 $</dd>-->
+<!--                        </dl>-->
+<!--                    </dt>-->
+<!--                    <dd class="sdCont">-->
+<!--                        <div class="tbWrap">-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="4" class="tcBlue">INV</td>-->
+<!--                                    <th>Term</th>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>Net 30 07%</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                    <td>15,920.73</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">[F]Truck</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                            <table>-->
+<!--                                <tr>-->
+<!--                                    <td rowspan="6" class="tcRed">RCV</td>-->
+<!--                                    <th>Amount</th>-->
+<!--                                    <th>Paid</th>-->
+<!--                                    <th>Balance</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>8,806.28</td>-->
+<!--                                    <td>9,469.12</td>-->
+<!--                                    <td>0.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th>Date</th>-->
+<!--                                    <th colspan="2">I.P#</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td>04-24-2020</td>-->
+<!--                                    <td colspan="2">194139 $6,000.00</td>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <th colspan="3">Remarks</th>-->
+<!--                                </tr>-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3">Check #2346 D/C $451.61 {1}</td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </dd>-->
+<!--                </dl>-->
+            </div>
+        </div>
+        <div class="fixBG"></div>
+    </section>
+</body>
+
+</html>

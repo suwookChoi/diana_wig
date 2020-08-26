@@ -1,0 +1,6 @@
+framework module SQLClient {
+  umbrella header "SQLClient-umbrella.h"
+
+  export *
+  module * { export * }
+}

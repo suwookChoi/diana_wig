@@ -1,0 +1,248 @@
+<html lang="ko">
+    <head>
+        <!--디자인팀 meta~link 정리함-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+        <link rel="stylesheet" type="text/css" href="webfont.css"/>
+        <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="common.css"/>
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+
+        <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="jquery-ui.js"></script>
+        <script type="text/javascript" src="moment.min.js"></script>
+        <script type="text/javascript" src="daterangepicker.js"></script>
+        <script type="text/javascript" src="common.js"></script>
+        <script type="text/javascript" src="style.js"></script>
+        <script type="text/javascript" src="header.js"></script>
+    </head>
+    
+    <script>
+        
+        var selectCard = new Object();
+        var searchWord = new Object();
+        var selectItemList = new Array();
+        var selectItemList2 = new Object();
+        var network = "";
+
+        $(document).ready(function(){
+            var width = $(window).width();
+            console.log(width);
+            window.webkit.messageHandlers.headerHtml.postMessage("createQuotation");
+            
+            $(document).on("click", "#itemDiv table", function(event) {
+                searchItemList();
+            });
+        });
+
+        function headerHtml(menu,id,network_stat){
+            header_html("createQuotation",id,"Y");
+            $(".createQuotation").parents().parents().children(".li button").css({"color": ""});
+            $(".createQuotation").css({"color": "#d94a67"});
+            network = network_stat;
+        }
+
+        function chooseItem(){
+            if($("#cardCode").val() == null || $("#cardCode").val() == ""){
+                showAlert("Notice","Please select a Customer.");
+            }else{
+                var data = {
+                    "searchWD" : $("#find_text").val()
+                    ,"CustomerData" : selectCard
+                    ,"pageNM" : "createQuotationItem"
+                    ,"funcNM" : "goSearchItemPage"
+                    ,"type" : "new"
+                };
+                window.webkit.messageHandlers.createQuotations.postMessage(data);
+            }
+        }
+
+       function searchItemList(){
+            if($("#cardCode").val() == ""){
+                showAlert("Notice","Please select a Customer.");
+                return false;
+            }
+            var data = {"selectedItem":JSON.stringify(selectItemList),"pageNM":"createQuotationSelectItem","funcNM":"modifyItemList","customerData":selectCard, "type":"selected"};
+
+            window.webkit.messageHandlers.createQuotations.postMessage(data);
+        }
+
+        function setPage(dataList,customer){
+            
+            var list = JSON.parse(dataList);
+            selectItemList = list;
+            
+            var context = "";
+            var context = "";
+            var totPrice = 0;
+            var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+
+            selectCard = JSON.parse(customer);
+            $("#cardCode").val(selectCard.cardCode);
+            $("#cardName").val(selectCard.cardName);
+
+            $.each(list,function(index,item){
+                
+                var price = item.itemPrice.replace(regExp,"");
+                context +='            <tr>';
+                context +='                <td><span class="itemLst" id="'+item.itemCode+index+'">'+item.itemCode+'</span></td>';
+                context +='            </tr>';
+                totPrice += Number(item.selectedQt) * Number(price);
+
+            });
+            $("#itemtable").html(context);
+
+            $("#totPrice").text(totPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+
+            var discount = totPrice * Number($("#discountPer").text());
+            $("#discount").text(discount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+
+            $("#tot").text((totPrice - discount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " $");
+
+            }
+
+        //고객 검색
+        function searchCustomerList() {
+            window.webkit.messageHandlers.moveCustomer.postMessage(JSON.stringify(selectCard));
+        }
+
+        function customerHtml(data) {
+            var cardData = JSON.parse(data);
+            $("#cardCode").val(cardData.cardCode);
+            $("#cardName").val(cardData.cardName);
+
+            selectCard = cardData;
+        }
+
+        // Quotation Create
+        function create(){
+            var regExp = /[\{\}\[\]\/?,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+            var selectList = new Object;
+            selectList = selectItemList;
+            
+            var paidSum = $("#tot").text().replace(regExp,"");
+            var CardCode = selectCard.cardCode;
+            var CardName = selectCard.cardName;
+            var Address = selectCard.Address;
+                        
+            if (JSON.stringify(selectItemList) == "[]" || selectItemList == null){
+                showAlert("Notice","Check Item Data");
+                return;
+            }
+
+            if (JSON.stringify(selectCard) == "{}" || selectCard == null || CardCode == "" || CardCode == "undefined"){
+               showAlert("Notice","Check Customer Infomation");
+               return;
+            }
+            
+            
+            if (paidSum == "" || paidSum == null || paidSum == "0"){
+                showAlert("Notice","Check Item Infomation");
+                return;
+            }
+            
+            var data = {
+                "funcNM" : "createQuotationDone",
+                "customerData" : selectCard,
+                "selectedItemList" : selectList.sort(),
+                "paidSum" : paidSum
+            };
+            
+            window.webkit.messageHandlers.createQuotations.postMessage(data);
+        }
+    function DB_INSERT(type){
+        if (type == "success"){
+            showAlert_OKcheck("Notice","Success Update");
+        }else{
+            showAlert("Notice","Fail Update");
+            return;
+        }
+    }
+    function checkOK(){
+        popup_Close();
+        goPage("createQuotations");
+    }
+    
+    function reLogin(){
+        showAlert("Error","Please try again login");
+    }
+    
+
+
+    </script>
+        <body class="createQuotation">
+            <div id='header' class='hdWrap'></div>
+            <section id="section">
+                <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+                <form method="post" name="quotationForm" id="createQuotaionFrom" >
+                <div class="conWrap">
+                    <div class="popWrap" id="test2"></div>
+                    <div class="schTbWrap">
+                            <table id="cardTable">
+                                <tr>
+                                    <th>Customer</th>
+                                    <td>
+                                        <input type="text" name="cardCode" id="cardCode" class="ipt wtBtn" readonly="readonly" placeholder="Code">
+                                        <button type="button" class ="btnIptSch" onclick="javascript:searchCustomerList();">Search</button>
+                                    </td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <th>Code</th>-->
+<!--                                    <td>-->
+<!--                                        <input type="text" name="cardCode" id="cardCode wtBtn" class="ipt" readonly="readonly" placeholder="Code">-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <th>Name</th>
+                                    <td>
+                                        <input type="text" name="cardName" id="cardName" class="ipt" readonly="readonly" placeholder="Name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Item</th>
+                                    <td>
+                                        <input type="text" id="find_text" class="ipt wtBtn" placeholder="Item">
+                                        <button type="button" class ="btnIptSch off" onclick="javascript:chooseItem()" >Search</button>
+                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="itemDiv" class="itemWrap">
+                            <table id="itemtable" class="itemTb" >
+                            </table>
+                        </div>
+                        <div class="dtlWrap">
+                            <dl>
+                                <dt>Total Before Discount</dt>
+                                <dd id="totPrice"></dd>
+                            </dl>
+                            <dl>
+                                <dt>Discount %</dt>
+                                <dd id="discountPer"></dd>
+                            </dl>
+                            <dl>
+                                <dt>Discount</dt>
+                                <dd id="discount"></dd>
+                            </dl>
+                            <dl>
+                                <dt>Tax</dt>
+                                <dd id="tax"></dd>
+                            </dl>
+                            <dl class="Total">
+                                <dt>Total</dt>
+                                <dd id="tot"></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="btnWrap">
+                        <button type = "button" class="btnDn" onclick="javascript:create()">Done</button>
+                    </div>
+                </form>
+                <div class="fixBG"></div>
+            </section>
+        </body>
+
+</html>

@@ -1,0 +1,1233 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00BE40F1FEA680734C0B00E9F8B12239 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		0DD31C35FA8ACF9D8E7EA7FFC0ACFD03 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 13B065E51640F1DE221B898D18905D7F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F37417CCA47098F1C9C36C406F9BF5D /* cspublic.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA40B4D602DDD06F837C86A66E29285 /* cspublic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		16FE2C8064B84613D4EB3595E56D21A4 /* sybfront.h in Headers */ = {isa = PBXBuildFile; fileRef = C573E97CDB6DD100DE8199F9B061A213 /* sybfront.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		17942995F6723855BA33BC995040CD42 /* SQLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEFBB0F1F4A71295BA1FE4301C430E7 /* SQLite.swift */; };
+		212340FAB9E625D94ED2803FE276F642 /* SQLite-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE1E1C55906F2809A74F0A86157D6536 /* SQLite-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27192D73EAA1146914C25D4D960C7541 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		30A0E0468D813FDB6AB4231C38E89FC7 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A162FA5D0488E288A01BB7B5B0BC0 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m */; };
+		36D31645D4BE7783B5A982172C4CEAA6 /* SQLite-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 83654B79B6A6AB33F9F7B519BBFE5399 /* SQLite-dummy.m */; };
+		39C9D3183EB135598511B341D1FF6D18 /* Pods-smart-Dianawig-ios-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2448F1E9E00160D44251B8B5AC4028AE /* Pods-smart-Dianawig-ios-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4189211A58AE8528D4086D4579FBEEC0 /* ctpublic.h in Headers */ = {isa = PBXBuildFile; fileRef = E47F0971334F56578695CE4339CAA19B /* ctpublic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F72D5D3A2828A3C65A57088E3423374 /* Pods-smart-Dianawig-iosTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7DB144FE96F91C94539B820D3B87E722 /* Pods-smart-Dianawig-iosTests-dummy.m */; };
+		6E95B8D24FEC32080648552647320784 /* sqldb.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AB5C6EF0EFC3A316EF5A549A3306730 /* sqldb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7532A734B041520B214191620CF83D7F /* tds_sysdep_public.h in Headers */ = {isa = PBXBuildFile; fileRef = 7620F75EC1AC0E373ABD463608F67F16 /* tds_sysdep_public.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E991D7EB7A63B6B610F9E0B54132026 /* SQLClient-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 362CCFE79454B934263B8375DBC28525 /* SQLClient-dummy.m */; };
+		817C40767675B6498AD68838CE34E98E /* cstypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 382D70C7FE8176A48C27746EADFC2B11 /* cstypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B432D94DE0E6FD8D98522541B09D2C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		9863D1439D478941C2F1B6283E8CA765 /* SQLClient-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1279C4A882F4E2C1D9AF146E9E4DA1 /* SQLClient-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9FA2AE98E3B3347D47887214D1AD7121 /* Pods-smart-Dianawig-iosTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 103C54D5A5EAFAC5D5BF81CD897F7222 /* Pods-smart-Dianawig-iosTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9146D8B515BFB7B84EE4818F676E969 /* bkpublic.h in Headers */ = {isa = PBXBuildFile; fileRef = 976670FB18F87CF4063F110CC268101A /* bkpublic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF01961730B244A7E96B529D9094F0E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		C3B67110EA68A54195BF6EA95732A330 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */; };
+		CFC4C49843FD05E1A4B81BE6E5156F95 /* Pods-smart-Dianawig-ios-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5A08CBF9EC93D1AF6FF6432864C989 /* Pods-smart-Dianawig-ios-dummy.m */; };
+		D02714D5F1FFF1CD4C39119D06E6FE3B /* sybdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 908D09A2DF1F9D6E4744322FEB98ED3D /* sybdb.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D68D1A3BA9D50F2626CE29F5A597D8B2 /* syberror.h in Headers */ = {isa = PBXBuildFile; fileRef = 721A550224C53DD47F789070C1F0FF3E /* syberror.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D77D363730ACAC6F3A73AFC80BBF1B26 /* SQLClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53919078F34696CDA4475ACB3ABCB3 /* SQLClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D8EC4B081AC202932A1EE9F17610D5DC /* odbcss.h in Headers */ = {isa = PBXBuildFile; fileRef = C577AB3E81CB2E4025892CBBC24AEAF5 /* odbcss.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EB4238C96AA51310C8A2D1A548C91E87 /* sqlfront.h in Headers */ = {isa = PBXBuildFile; fileRef = 388762EA14FFD05939C737650E82992A /* sqlfront.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA3688EAF0ABED5733149489B5C4F3DC /* SQLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A36D429BCE6EC07DE996DB33F2B72C /* SQLClient.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		242413BACABBB05B2F53905E07207646 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD2E354CCAB4AADEAF3AA03913422948;
+			remoteInfo = SQLClient;
+		};
+		2AA12630ACDA39D98BD506BA9D26579E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4594A9681C6CA1EFBB2A4CF22809E039;
+			remoteInfo = SQLite;
+		};
+		2CD1E054A75BC691ED151214EEB6EE88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD2E354CCAB4AADEAF3AA03913422948;
+			remoteInfo = SQLClient;
+		};
+		36CECB91B21815F2730C05A1E1FAD932 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55740D467988D7110E26172F0E6B7CBD;
+			remoteInfo = "Pods-smart-Dianawig-ios";
+		};
+		AD92468DC06A5E5F5F46E7EDBD083D0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4594A9681C6CA1EFBB2A4CF22809E039;
+			remoteInfo = SQLite;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		005D54366B26B649945B0DF57FC3304F /* Pods-smart-Dianawig-iosTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-smart-Dianawig-iosTests.modulemap"; sourceTree = "<group>"; };
+		06B357B5CD65B61FD81C0FB3F2421517 /* Pods-smart-Dianawig-ios.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-smart-Dianawig-ios.modulemap"; sourceTree = "<group>"; };
+		093F4942EE7DC7EC74F8E95A155A225F /* SQLite.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLite.release.xcconfig; sourceTree = "<group>"; };
+		09914EAE8F06E9B1D3B2D5F19FA36F26 /* Pods-smart-Dianawig-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B3E89AA8BB0728EC1F3CE1C3A63EE10 /* Pods-smart-Dianawig-iosTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-smart-Dianawig-iosTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0F38A5EE8772BD98C964118DFD6524F7 /* SQLClient-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SQLClient-Info.plist"; sourceTree = "<group>"; };
+		0F44919470AAA7ED8AC34E6DD39781E5 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-Info.plist"; sourceTree = "<group>"; };
+		103C54D5A5EAFAC5D5BF81CD897F7222 /* Pods-smart-Dianawig-iosTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-smart-Dianawig-iosTests-umbrella.h"; sourceTree = "<group>"; };
+		1077CC02A127AA577C86E3C29027CEAB /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.modulemap"; sourceTree = "<group>"; };
+		119EBA1FA306F10399CF22C753BFEA12 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		122AF9EA45CE3A315C1F6C51F07200F3 /* SQLite.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SQLite.modulemap; sourceTree = "<group>"; };
+		13B065E51640F1DE221B898D18905D7F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h"; sourceTree = "<group>"; };
+		18C4842FE7283A93B66F0EBB8B7EC11D /* Pods-smart-Dianawig-iosTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-iosTests-Info.plist"; sourceTree = "<group>"; };
+		1BC06C6D88428484E710CC2FB6F6BE32 /* Pods_smart_Dianawig_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smart_Dianawig_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2068CB8D0BD6C037FA65B8A9D8816996 /* Pods_smart_Dianawig_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smart_Dianawig_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2448F1E9E00160D44251B8B5AC4028AE /* Pods-smart-Dianawig-ios-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-smart-Dianawig-ios-umbrella.h"; sourceTree = "<group>"; };
+		27F685944750DA56C76EE5E315451DED /* SQLite-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLite-prefix.pch"; sourceTree = "<group>"; };
+		2AB5C6EF0EFC3A316EF5A549A3306730 /* sqldb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqldb.h; path = SQLClient/SQLClient/SQLClient/sqldb.h; sourceTree = "<group>"; };
+		2DBA0304074C865073D4DB5874CAAEC8 /* Pods-smart-Dianawig-ios-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-ios-acknowledgements.plist"; sourceTree = "<group>"; };
+		3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		362CCFE79454B934263B8375DBC28525 /* SQLClient-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SQLClient-dummy.m"; sourceTree = "<group>"; };
+		382D70C7FE8176A48C27746EADFC2B11 /* cstypes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cstypes.h; path = SQLClient/SQLClient/SQLClient/cstypes.h; sourceTree = "<group>"; };
+		388762EA14FFD05939C737650E82992A /* sqlfront.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlfront.h; path = SQLClient/SQLClient/SQLClient/sqlfront.h; sourceTree = "<group>"; };
+		3A1A08C4FEB75AFF7181D5712AB0F766 /* Pods-smart-Dianawig-ios-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-smart-Dianawig-ios-frameworks.sh"; sourceTree = "<group>"; };
+		3B53919078F34696CDA4475ACB3ABCB3 /* SQLClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SQLClient.h; path = SQLClient/SQLClient/SQLClient/SQLClient.h; sourceTree = "<group>"; };
+		3BC1A51C5E058440055188E63720B44E /* SQLClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SQLClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D530B2B842934A0E89A63B57F09289E /* Pods-smart-Dianawig-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-ios.release.xcconfig"; sourceTree = "<group>"; };
+		40D7C4F5BA8418070D7E472B910D73FB /* SQLClient.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SQLClient.modulemap; sourceTree = "<group>"; };
+		47572B920F335BEFE0CA83986FCE550F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4CA40B4D602DDD06F837C86A66E29285 /* cspublic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cspublic.h; path = SQLClient/SQLClient/SQLClient/cspublic.h; sourceTree = "<group>"; };
+		578A151C9678D8B6482C004EA7395B40 /* Pods-smart-Dianawig-iosTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-iosTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		5A5A08CBF9EC93D1AF6FF6432864C989 /* Pods-smart-Dianawig-ios-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-smart-Dianawig-ios-dummy.m"; sourceTree = "<group>"; };
+		6F8A42FC6241AFECA540B946FA12180B /* SQLClient-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLClient-prefix.pch"; sourceTree = "<group>"; };
+		721A550224C53DD47F789070C1F0FF3E /* syberror.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = syberror.h; path = SQLClient/SQLClient/SQLClient/syberror.h; sourceTree = "<group>"; };
+		7620F75EC1AC0E373ABD463608F67F16 /* tds_sysdep_public.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = tds_sysdep_public.h; path = SQLClient/SQLClient/SQLClient/tds_sysdep_public.h; sourceTree = "<group>"; };
+		7DB144FE96F91C94539B820D3B87E722 /* Pods-smart-Dianawig-iosTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-smart-Dianawig-iosTests-dummy.m"; sourceTree = "<group>"; };
+		7ED3C2963F788CD8EFC329CA8A3A5568 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-frameworks.sh"; sourceTree = "<group>"; };
+		83654B79B6A6AB33F9F7B519BBFE5399 /* SQLite-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SQLite-dummy.m"; sourceTree = "<group>"; };
+		874B33E9216B5EA22C04E73E77A41A8E /* Pods-smart-Dianawig-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-iosTests.release.xcconfig"; sourceTree = "<group>"; };
+		908D09A2DF1F9D6E4744322FEB98ED3D /* sybdb.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sybdb.h; path = SQLClient/SQLClient/SQLClient/sybdb.h; sourceTree = "<group>"; };
+		976670FB18F87CF4063F110CC268101A /* bkpublic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bkpublic.h; path = SQLClient/SQLClient/SQLClient/bkpublic.h; sourceTree = "<group>"; };
+		977A162FA5D0488E288A01BB7B5B0BC0 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m"; sourceTree = "<group>"; };
+		9B47AC5E34E5F8485F5E46EAB2F04ED2 /* libsybdb.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libsybdb.a; path = SQLClient/SQLClient/SQLClient/libsybdb.a; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9EDF1B4EAE2B43A11D783199E0DC33D6 /* SQLClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLClient.release.xcconfig; sourceTree = "<group>"; };
+		A55CAEDAEF467FF3B335FFE5BAB7882F /* Pods-smart-Dianawig-ios-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-ios-Info.plist"; sourceTree = "<group>"; };
+		ADC4E6E3B1AA591F78EAF933AC157568 /* SQLClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLClient.debug.xcconfig; sourceTree = "<group>"; };
+		B2A36D429BCE6EC07DE996DB33F2B72C /* SQLClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SQLClient.m; path = SQLClient/SQLClient/SQLClient/SQLClient.m; sourceTree = "<group>"; };
+		BA024E9A1D1513F81548F500BD318DA1 /* Pods-smart-Dianawig-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		BC1279C4A882F4E2C1D9AF146E9E4DA1 /* SQLClient-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLClient-umbrella.h"; sourceTree = "<group>"; };
+		C573E97CDB6DD100DE8199F9B061A213 /* sybfront.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sybfront.h; path = SQLClient/SQLClient/SQLClient/sybfront.h; sourceTree = "<group>"; };
+		C577AB3E81CB2E4025892CBBC24AEAF5 /* odbcss.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = odbcss.h; path = SQLClient/SQLClient/SQLClient/odbcss.h; sourceTree = "<group>"; };
+		C6760FD4847ACB108632CEEFF1923DF8 /* Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAF1020BADED63206203E7506A10997 /* SQLite.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SQLite.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D813184DDF122D7346D4CA2E4438205C /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E186B9AFF9FA7E099E0642D72BEC4256 /* SQLite-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SQLite-Info.plist"; sourceTree = "<group>"; };
+		E47F0971334F56578695CE4339CAA19B /* ctpublic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ctpublic.h; path = SQLClient/SQLClient/SQLClient/ctpublic.h; sourceTree = "<group>"; };
+		EE1E1C55906F2809A74F0A86157D6536 /* SQLite-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SQLite-umbrella.h"; sourceTree = "<group>"; };
+		F11E1BAA9FF0A594A9E0652315C9210D /* Pods-smart-Dianawig-ios-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-smart-Dianawig-ios-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FAA90F90221682C05FD3B7031CBE8707 /* SQLite.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SQLite.debug.xcconfig; sourceTree = "<group>"; };
+		FCDBCF467D5924C41DDB5D160D30DAF6 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.plist"; sourceTree = "<group>"; };
+		FFEFBB0F1F4A71295BA1FE4301C430E7 /* SQLite.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SQLite.swift; path = SQLite/Classes/SQLite.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6883A373DA1E34BD211B20959D1D6C2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27192D73EAA1146914C25D4D960C7541 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E746889060A134793A79C1EE2060DDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C3B67110EA68A54195BF6EA95732A330 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9180E5CF9FF84C277B60795089E76F61 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF01961730B244A7E96B529D9094F0E6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0CDD9A4DAF3728A62846749D0D9AD9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00BE40F1FEA680734C0B00E9F8B12239 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE02EEB6AF41DC931A30D0422388F86D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B432D94DE0E6FD8D98522541B09D2C7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0C5A040CFC7628BF7F5EEF4C91DA25E2 /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				FFEFBB0F1F4A71295BA1FE4301C430E7 /* SQLite.swift */,
+				842934D136A11DD72E878C9AF2465925 /* Support Files */,
+			);
+			path = SQLite;
+			sourceTree = "<group>";
+		};
+		394C9FB05FD991D6E1937BC00D15C062 /* Pods-smart-Dianawig-ios */ = {
+			isa = PBXGroup;
+			children = (
+				06B357B5CD65B61FD81C0FB3F2421517 /* Pods-smart-Dianawig-ios.modulemap */,
+				F11E1BAA9FF0A594A9E0652315C9210D /* Pods-smart-Dianawig-ios-acknowledgements.markdown */,
+				2DBA0304074C865073D4DB5874CAAEC8 /* Pods-smart-Dianawig-ios-acknowledgements.plist */,
+				5A5A08CBF9EC93D1AF6FF6432864C989 /* Pods-smart-Dianawig-ios-dummy.m */,
+				3A1A08C4FEB75AFF7181D5712AB0F766 /* Pods-smart-Dianawig-ios-frameworks.sh */,
+				A55CAEDAEF467FF3B335FFE5BAB7882F /* Pods-smart-Dianawig-ios-Info.plist */,
+				2448F1E9E00160D44251B8B5AC4028AE /* Pods-smart-Dianawig-ios-umbrella.h */,
+				BA024E9A1D1513F81548F500BD318DA1 /* Pods-smart-Dianawig-ios.debug.xcconfig */,
+				3D530B2B842934A0E89A63B57F09289E /* Pods-smart-Dianawig-ios.release.xcconfig */,
+			);
+			name = "Pods-smart-Dianawig-ios";
+			path = "Target Support Files/Pods-smart-Dianawig-ios";
+			sourceTree = "<group>";
+		};
+		47F18D15DD1B882B471951C0E6C1C295 /* SQLClient */ = {
+			isa = PBXGroup;
+			children = (
+				976670FB18F87CF4063F110CC268101A /* bkpublic.h */,
+				4CA40B4D602DDD06F837C86A66E29285 /* cspublic.h */,
+				382D70C7FE8176A48C27746EADFC2B11 /* cstypes.h */,
+				E47F0971334F56578695CE4339CAA19B /* ctpublic.h */,
+				C577AB3E81CB2E4025892CBBC24AEAF5 /* odbcss.h */,
+				3B53919078F34696CDA4475ACB3ABCB3 /* SQLClient.h */,
+				B2A36D429BCE6EC07DE996DB33F2B72C /* SQLClient.m */,
+				2AB5C6EF0EFC3A316EF5A549A3306730 /* sqldb.h */,
+				388762EA14FFD05939C737650E82992A /* sqlfront.h */,
+				908D09A2DF1F9D6E4744322FEB98ED3D /* sybdb.h */,
+				721A550224C53DD47F789070C1F0FF3E /* syberror.h */,
+				C573E97CDB6DD100DE8199F9B061A213 /* sybfront.h */,
+				7620F75EC1AC0E373ABD463608F67F16 /* tds_sysdep_public.h */,
+				575C0274487751762751A76D31F075CC /* Frameworks */,
+				B74290E172A58A9F642948447D4C1ADF /* Support Files */,
+			);
+			path = SQLClient;
+			sourceTree = "<group>";
+		};
+		575C0274487751762751A76D31F075CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B47AC5E34E5F8485F5E46EAB2F04ED2 /* libsybdb.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		842934D136A11DD72E878C9AF2465925 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				122AF9EA45CE3A315C1F6C51F07200F3 /* SQLite.modulemap */,
+				83654B79B6A6AB33F9F7B519BBFE5399 /* SQLite-dummy.m */,
+				E186B9AFF9FA7E099E0642D72BEC4256 /* SQLite-Info.plist */,
+				27F685944750DA56C76EE5E315451DED /* SQLite-prefix.pch */,
+				EE1E1C55906F2809A74F0A86157D6536 /* SQLite-umbrella.h */,
+				FAA90F90221682C05FD3B7031CBE8707 /* SQLite.debug.xcconfig */,
+				093F4942EE7DC7EC74F8E95A155A225F /* SQLite.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SQLite";
+			sourceTree = "<group>";
+		};
+		8D7BDB20DD4FAFA4BB95AB23400C2CE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47F18D15DD1B882B471951C0E6C1C295 /* SQLClient */,
+				0C5A040CFC7628BF7F5EEF4C91DA25E2 /* SQLite */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		95B5FD303271BF27B90F17A9E8D5D2AD /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				394C9FB05FD991D6E1937BC00D15C062 /* Pods-smart-Dianawig-ios */,
+				D7F25C4F7B7F4E28AD31952173EA326E /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests */,
+				C3A0ACB264ACFF4B5CC65D5DA35DC8AC /* Pods-smart-Dianawig-iosTests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		A74160260F7D990AE7819C2B62D0E30F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BC06C6D88428484E710CC2FB6F6BE32 /* Pods_smart_Dianawig_ios.framework */,
+				C6760FD4847ACB108632CEEFF1923DF8 /* Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests.framework */,
+				2068CB8D0BD6C037FA65B8A9D8816996 /* Pods_smart_Dianawig_iosTests.framework */,
+				3BC1A51C5E058440055188E63720B44E /* SQLClient.framework */,
+				CEAF1020BADED63206203E7506A10997 /* SQLite.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B74290E172A58A9F642948447D4C1ADF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				40D7C4F5BA8418070D7E472B910D73FB /* SQLClient.modulemap */,
+				362CCFE79454B934263B8375DBC28525 /* SQLClient-dummy.m */,
+				0F38A5EE8772BD98C964118DFD6524F7 /* SQLClient-Info.plist */,
+				6F8A42FC6241AFECA540B946FA12180B /* SQLClient-prefix.pch */,
+				BC1279C4A882F4E2C1D9AF146E9E4DA1 /* SQLClient-umbrella.h */,
+				ADC4E6E3B1AA591F78EAF933AC157568 /* SQLClient.debug.xcconfig */,
+				9EDF1B4EAE2B43A11D783199E0DC33D6 /* SQLClient.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SQLClient";
+			sourceTree = "<group>";
+		};
+		C0834CEBB1379A84116EF29F93051C60 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3212113385A8FBBDB272BD23C409FF61 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		C3A0ACB264ACFF4B5CC65D5DA35DC8AC /* Pods-smart-Dianawig-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				005D54366B26B649945B0DF57FC3304F /* Pods-smart-Dianawig-iosTests.modulemap */,
+				0B3E89AA8BB0728EC1F3CE1C3A63EE10 /* Pods-smart-Dianawig-iosTests-acknowledgements.markdown */,
+				578A151C9678D8B6482C004EA7395B40 /* Pods-smart-Dianawig-iosTests-acknowledgements.plist */,
+				7DB144FE96F91C94539B820D3B87E722 /* Pods-smart-Dianawig-iosTests-dummy.m */,
+				18C4842FE7283A93B66F0EBB8B7EC11D /* Pods-smart-Dianawig-iosTests-Info.plist */,
+				103C54D5A5EAFAC5D5BF81CD897F7222 /* Pods-smart-Dianawig-iosTests-umbrella.h */,
+				09914EAE8F06E9B1D3B2D5F19FA36F26 /* Pods-smart-Dianawig-iosTests.debug.xcconfig */,
+				874B33E9216B5EA22C04E73E77A41A8E /* Pods-smart-Dianawig-iosTests.release.xcconfig */,
+			);
+			name = "Pods-smart-Dianawig-iosTests";
+			path = "Target Support Files/Pods-smart-Dianawig-iosTests";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				8D7BDB20DD4FAFA4BB95AB23400C2CE0 /* Pods */,
+				A74160260F7D990AE7819C2B62D0E30F /* Products */,
+				95B5FD303271BF27B90F17A9E8D5D2AD /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0834CEBB1379A84116EF29F93051C60 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D7F25C4F7B7F4E28AD31952173EA326E /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1077CC02A127AA577C86E3C29027CEAB /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.modulemap */,
+				119EBA1FA306F10399CF22C753BFEA12 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.markdown */,
+				FCDBCF467D5924C41DDB5D160D30DAF6 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-acknowledgements.plist */,
+				977A162FA5D0488E288A01BB7B5B0BC0 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m */,
+				7ED3C2963F788CD8EFC329CA8A3A5568 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-frameworks.sh */,
+				0F44919470AAA7ED8AC34E6DD39781E5 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-Info.plist */,
+				13B065E51640F1DE221B898D18905D7F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h */,
+				D813184DDF122D7346D4CA2E4438205C /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.debug.xcconfig */,
+				47572B920F335BEFE0CA83986FCE550F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.release.xcconfig */,
+			);
+			name = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests";
+			path = "Target Support Files/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		33C8671214CB1801106EAF1E4A457473 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DD31C35FA8ACF9D8E7EA7FFC0ACFD03 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56CE64A0DB924CB65FA707B8B23643A7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FA2AE98E3B3347D47887214D1AD7121 /* Pods-smart-Dianawig-iosTests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		60AEF350569A598D3DA5C6775DFD4CA1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				212340FAB9E625D94ED2803FE276F642 /* SQLite-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9ABBC5E945C0B2713D23AF9F20E6C3AD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9146D8B515BFB7B84EE4818F676E969 /* bkpublic.h in Headers */,
+				0F37417CCA47098F1C9C36C406F9BF5D /* cspublic.h in Headers */,
+				817C40767675B6498AD68838CE34E98E /* cstypes.h in Headers */,
+				4189211A58AE8528D4086D4579FBEEC0 /* ctpublic.h in Headers */,
+				D8EC4B081AC202932A1EE9F17610D5DC /* odbcss.h in Headers */,
+				9863D1439D478941C2F1B6283E8CA765 /* SQLClient-umbrella.h in Headers */,
+				D77D363730ACAC6F3A73AFC80BBF1B26 /* SQLClient.h in Headers */,
+				6E95B8D24FEC32080648552647320784 /* sqldb.h in Headers */,
+				EB4238C96AA51310C8A2D1A548C91E87 /* sqlfront.h in Headers */,
+				D02714D5F1FFF1CD4C39119D06E6FE3B /* sybdb.h in Headers */,
+				D68D1A3BA9D50F2626CE29F5A597D8B2 /* syberror.h in Headers */,
+				16FE2C8064B84613D4EB3595E56D21A4 /* sybfront.h in Headers */,
+				7532A734B041520B214191620CF83D7F /* tds_sysdep_public.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1FD5605DAF39DD0A4F943640652669A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39C9D3183EB135598511B341D1FF6D18 /* Pods-smart-Dianawig-ios-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		070E541F4DD8CD5CABBA1B657FE12313 /* Pods-smart-Dianawig-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 27FC30490342424350D1E9445F8A3A87 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-iosTests" */;
+			buildPhases = (
+				56CE64A0DB924CB65FA707B8B23643A7 /* Headers */,
+				36AA0A5ADA9709B7EC138A5CD3484E8E /* Sources */,
+				EE02EEB6AF41DC931A30D0422388F86D /* Frameworks */,
+				F3D8D7C86BC5D4F5E7DF46D3B6AF0841 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				31A368F4FF025C8C261250FF6DB51FC7 /* PBXTargetDependency */,
+			);
+			name = "Pods-smart-Dianawig-iosTests";
+			productName = "Pods-smart-Dianawig-iosTests";
+			productReference = 2068CB8D0BD6C037FA65B8A9D8816996 /* Pods_smart_Dianawig_iosTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4594A9681C6CA1EFBB2A4CF22809E039 /* SQLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92D65DFF3FEEBCA2A3D2244BF0545A78 /* Build configuration list for PBXNativeTarget "SQLite" */;
+			buildPhases = (
+				60AEF350569A598D3DA5C6775DFD4CA1 /* Headers */,
+				1E496E1A138EF9A9C58F2371E927528C /* Sources */,
+				9180E5CF9FF84C277B60795089E76F61 /* Frameworks */,
+				A8B35A8B1A5D7DCC72E306A192D54B41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SQLite;
+			productName = SQLite;
+			productReference = CEAF1020BADED63206203E7506A10997 /* SQLite.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		55740D467988D7110E26172F0E6B7CBD /* Pods-smart-Dianawig-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 11E53C486BE74D3D7DCA6480D9B383B0 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-ios" */;
+			buildPhases = (
+				E1FD5605DAF39DD0A4F943640652669A /* Headers */,
+				C4CE3532A44F79DB16573E1461AF6E00 /* Sources */,
+				6E746889060A134793A79C1EE2060DDD /* Frameworks */,
+				1EE4EC326C82D20B47B7098142E29B60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				34CAA13A4BBF4F4222AD3E402B87E5DD /* PBXTargetDependency */,
+				69BF298FF09DED777EB45585B300DDA8 /* PBXTargetDependency */,
+			);
+			name = "Pods-smart-Dianawig-ios";
+			productName = "Pods-smart-Dianawig-ios";
+			productReference = 1BC06C6D88428484E710CC2FB6F6BE32 /* Pods_smart_Dianawig_ios.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		99C3BC89CC1DB4286C1BA3117B31CAC2 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 50B1E249F60E48FE57E20312A068F832 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests" */;
+			buildPhases = (
+				33C8671214CB1801106EAF1E4A457473 /* Headers */,
+				89B9C41A9965BDAB0D4D6914EE065E21 /* Sources */,
+				A0CDD9A4DAF3728A62846749D0D9AD9C /* Frameworks */,
+				187546250E085017E7BE6D7C5A463F73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93AA180560C70C10DF941168EE469B43 /* PBXTargetDependency */,
+				4D02B9C3060053F37AC31A35FB2E6618 /* PBXTargetDependency */,
+			);
+			name = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests";
+			productName = "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests";
+			productReference = C6760FD4847ACB108632CEEFF1923DF8 /* Pods_smart_Dianawig_ios_smart_Dianawig_iosUITests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		BD2E354CCAB4AADEAF3AA03913422948 /* SQLClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63BE49D5FB045947AE4DDA87802707DF /* Build configuration list for PBXNativeTarget "SQLClient" */;
+			buildPhases = (
+				9ABBC5E945C0B2713D23AF9F20E6C3AD /* Headers */,
+				C8341A3C547CA9EEE9F88C5C2D6D79FC /* Sources */,
+				6883A373DA1E34BD211B20959D1D6C2D /* Frameworks */,
+				89F80E54DFA4301884C29E08C69E61A6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SQLClient;
+			productName = SQLClient;
+			productReference = 3BC1A51C5E058440055188E63720B44E /* SQLClient.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = A74160260F7D990AE7819C2B62D0E30F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55740D467988D7110E26172F0E6B7CBD /* Pods-smart-Dianawig-ios */,
+				99C3BC89CC1DB4286C1BA3117B31CAC2 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests */,
+				070E541F4DD8CD5CABBA1B657FE12313 /* Pods-smart-Dianawig-iosTests */,
+				BD2E354CCAB4AADEAF3AA03913422948 /* SQLClient */,
+				4594A9681C6CA1EFBB2A4CF22809E039 /* SQLite */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		187546250E085017E7BE6D7C5A463F73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EE4EC326C82D20B47B7098142E29B60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89F80E54DFA4301884C29E08C69E61A6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A8B35A8B1A5D7DCC72E306A192D54B41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3D8D7C86BC5D4F5E7DF46D3B6AF0841 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1E496E1A138EF9A9C58F2371E927528C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36D31645D4BE7783B5A982172C4CEAA6 /* SQLite-dummy.m in Sources */,
+				17942995F6723855BA33BC995040CD42 /* SQLite.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36AA0A5ADA9709B7EC138A5CD3484E8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5F72D5D3A2828A3C65A57088E3423374 /* Pods-smart-Dianawig-iosTests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9C41A9965BDAB0D4D6914EE065E21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30A0E0468D813FDB6AB4231C38E89FC7 /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4CE3532A44F79DB16573E1461AF6E00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFC4C49843FD05E1A4B81BE6E5156F95 /* Pods-smart-Dianawig-ios-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8341A3C547CA9EEE9F88C5C2D6D79FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E991D7EB7A63B6B610F9E0B54132026 /* SQLClient-dummy.m in Sources */,
+				FA3688EAF0ABED5733149489B5C4F3DC /* SQLClient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		31A368F4FF025C8C261250FF6DB51FC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-smart-Dianawig-ios";
+			target = 55740D467988D7110E26172F0E6B7CBD /* Pods-smart-Dianawig-ios */;
+			targetProxy = 36CECB91B21815F2730C05A1E1FAD932 /* PBXContainerItemProxy */;
+		};
+		34CAA13A4BBF4F4222AD3E402B87E5DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLClient;
+			target = BD2E354CCAB4AADEAF3AA03913422948 /* SQLClient */;
+			targetProxy = 2CD1E054A75BC691ED151214EEB6EE88 /* PBXContainerItemProxy */;
+		};
+		4D02B9C3060053F37AC31A35FB2E6618 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLite;
+			target = 4594A9681C6CA1EFBB2A4CF22809E039 /* SQLite */;
+			targetProxy = AD92468DC06A5E5F5F46E7EDBD083D0B /* PBXContainerItemProxy */;
+		};
+		69BF298FF09DED777EB45585B300DDA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLite;
+			target = 4594A9681C6CA1EFBB2A4CF22809E039 /* SQLite */;
+			targetProxy = 2AA12630ACDA39D98BD506BA9D26579E /* PBXContainerItemProxy */;
+		};
+		93AA180560C70C10DF941168EE469B43 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SQLClient;
+			target = BD2E354CCAB4AADEAF3AA03913422948 /* SQLClient */;
+			targetProxy = 242413BACABBB05B2F53905E07207646 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10DBDCB6A48B6F40707DA606FF0B44A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 093F4942EE7DC7EC74F8E95A155A225F /* SQLite.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SQLite/SQLite-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SQLite/SQLite-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SQLite/SQLite.modulemap";
+				PRODUCT_MODULE_NAME = SQLite;
+				PRODUCT_NAME = SQLite;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3C36726D86A280DDCA5460A537F69652 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 874B33E9216B5EA22C04E73E77A41A8E /* Pods-smart-Dianawig-iosTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-iosTests/Pods-smart-Dianawig-iosTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-iosTests/Pods-smart-Dianawig-iosTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4B208E6ABB4D775EC93525617B00752A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA024E9A1D1513F81548F500BD318DA1 /* Pods-smart-Dianawig-ios.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-ios/Pods-smart-Dianawig-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-ios/Pods-smart-Dianawig-ios.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		646B4DDF5FE3F60C6B2123CC8695458E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D813184DDF122D7346D4CA2E4438205C /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		78A14F35B5218AC0AB5FAE5DFF864C37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EDF1B4EAE2B43A11D783199E0DC33D6 /* SQLClient.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SQLClient/SQLClient-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SQLClient/SQLClient-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SQLClient/SQLClient.modulemap";
+				PRODUCT_MODULE_NAME = SQLClient;
+				PRODUCT_NAME = SQLClient;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7D96A1DF9756F1F5091020A2D657E471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47572B920F335BEFE0CA83986FCE550F /* Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests/Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8589EC8C531C05FBAB726AC72C295E05 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAA90F90221682C05FD3B7031CBE8707 /* SQLite.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SQLite/SQLite-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SQLite/SQLite-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SQLite/SQLite.modulemap";
+				PRODUCT_MODULE_NAME = SQLite;
+				PRODUCT_NAME = SQLite;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86913B3782F2087DD6387BB53C63C8F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09914EAE8F06E9B1D3B2D5F19FA36F26 /* Pods-smart-Dianawig-iosTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-iosTests/Pods-smart-Dianawig-iosTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-iosTests/Pods-smart-Dianawig-iosTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		89C3789286D2D64C5A4BCC1D8156FCA5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3D530B2B842934A0E89A63B57F09289E /* Pods-smart-Dianawig-ios.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "Target Support Files/Pods-smart-Dianawig-ios/Pods-smart-Dianawig-ios-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-smart-Dianawig-ios/Pods-smart-Dianawig-ios.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CBDC07236AD430BE80320D07C3C6A409 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADC4E6E3B1AA591F78EAF933AC157568 /* SQLClient.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "Target Support Files/SQLClient/SQLClient-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SQLClient/SQLClient-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/SQLClient/SQLClient.modulemap";
+				PRODUCT_MODULE_NAME = SQLClient;
+				PRODUCT_NAME = SQLClient;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DFD9D19FEEBF98DE271D7FBABCB845B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		F5F04600F5626DC980F02790D1ED2C19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		11E53C486BE74D3D7DCA6480D9B383B0 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B208E6ABB4D775EC93525617B00752A /* Debug */,
+				89C3789286D2D64C5A4BCC1D8156FCA5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		27FC30490342424350D1E9445F8A3A87 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86913B3782F2087DD6387BB53C63C8F3 /* Debug */,
+				3C36726D86A280DDCA5460A537F69652 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFD9D19FEEBF98DE271D7FBABCB845B5 /* Debug */,
+				F5F04600F5626DC980F02790D1ED2C19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		50B1E249F60E48FE57E20312A068F832 /* Build configuration list for PBXNativeTarget "Pods-smart-Dianawig-ios-smart-Dianawig-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				646B4DDF5FE3F60C6B2123CC8695458E /* Debug */,
+				7D96A1DF9756F1F5091020A2D657E471 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		63BE49D5FB045947AE4DDA87802707DF /* Build configuration list for PBXNativeTarget "SQLClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CBDC07236AD430BE80320D07C3C6A409 /* Debug */,
+				78A14F35B5218AC0AB5FAE5DFF864C37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92D65DFF3FEEBCA2A3D2244BF0545A78 /* Build configuration list for PBXNativeTarget "SQLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8589EC8C531C05FBAB726AC72C295E05 /* Debug */,
+				10DBDCB6A48B6F40707DA606FF0B44A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

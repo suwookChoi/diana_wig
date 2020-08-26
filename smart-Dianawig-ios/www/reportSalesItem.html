@@ -1,0 +1,322 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+    <script type="text/javascript" src="header.js"></script>
+</head>
+<body>
+
+<script>
+    var selectCard = new Object();
+    var searchWord = new Object();
+    var selectDate = new Object();
+    var fromDate = "";
+    var toDate = "";
+    var selectItemList = new Array();
+    var flag = false;
+    var item_flag = false;
+    var network = "";
+    
+    jQuery("document").ready(function() {
+        // Header 설정
+        window.webkit.messageHandlers.headerHtml.postMessage("reportSaleItem");
+        if(network == "N") $(".almWrap").show();
+        else $(".almWrap").hide();
+        
+        //아이템 선택 시
+        $(document).off("click", "#itemUl dl").on("click", "#itemUl dl", function(event) {
+            var id = $(this).children().children().children(".itemCode").text();
+            var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+            id  = id.replace(regExp, "").replace(" ","");
+            
+            if($(this).children().children().children(".itemName").text() == 'undefied' || $(this).children().children().children(".itemName").text() == '' || $(this).children().children().children(".itemName").text() == null){}
+            else{
+                if(!item_flag){
+                   //$(this).css("background","#ffe3a6");
+                   $(this).children(".sdList .item_detail").show();
+                   //$("#"+id).parents().parents().show();
+                   $(this).addClass("sdOn");
+                    var css = $("#"+id).attr('display');
+                    item_flag = true;
+                }else if(item_flag){
+                   // $(this).css("background","none");
+                   $(this).removeClass("sdOn");
+                   $(this).children(".sdList .item_detail").hide();
+                   //$("#"+id).parents().parents().hide();
+                    item_flag = false;
+                }
+            }
+            
+        });
+        
+        // 초기 데이터
+     //    window.webkit.messageHandlers.resportSalesItem.postMessage();
+    });
+    // Header
+    function headerHtml(menu,id,network_stat){
+        network = network_stat;
+        header_html("reportSalesItem",id,"Y");
+        $(".reportSaleItem").parents().parents().children(".li button").css({"color": ""});
+        $(".reportSaleItem").css({"color": "#d94a67"});
+        $(".report_li").css({"color": "#d94a67"});
+        
+    }
+
+    // 사용자 데이터
+    function searchCustomerList() {
+        window.webkit.messageHandlers.moveCustomer.postMessage(JSON.stringify(selectCard));
+    }
+    
+    function customerHtml(data) {
+        selectCard = JSON.parse(data);
+        
+        $("#cardCode").val(selectCard.cardCode);
+        $("#cardName").val(selectCard.cardName);
+        $("#balance").val(selectCard.cardBalance);
+    }
+    // 아이템 데이터
+    function searchItemList(){
+        if($("#cardCode").val() == ""){
+            showAlert("Notice","Please select a Customer.");
+        }else{
+            var preDate = $("#fromDate").val();
+            var nextDate = $("#toDate").val();
+            var current_date = new Date();
+            
+            var date = new Date();
+            var current_date = date.getFullYear()+""+pad(String(date.getMonth()+1),2)+""+pad(String(date.getDate()),2);
+                
+            var preDay = preDate.substr(0,2);
+            var preMonth = preDate.substr(3,2);
+            var preYear = preDate.substr(6,4);
+            var pre = preYear+""+preMonth+""+preDay;
+           
+            var nextDay = nextDate.substr(0,2);
+            var nextMonth = nextDate.substr(3,2);
+            var nextYear = nextDate.substr(6,4);
+            var next = nextYear+""+nextMonth+""+nextDay;
+            
+            
+            if(preDate < nextDate && preDate != nextDate){
+                 showAlert("Notice","1Please check Date.");
+            }else if(nextDate == "" || preDate == "" || nextDate == null || preDate == null){
+                console.log("2");
+                showAlert("Notice","2Please check Date.");
+            }
+<!--            else if(preDate < current_date || nextDate < current_date){-->
+<!--                showAlert("Notice","3Please check Date.");-->
+<!--            }-->
+            else{
+              var data = {"fromDate":preDate,"toDate":nextDate,"customerData":selectCard,"searchWord" : $("#searchID").val()};
+              window.webkit.messageHandlers.resportSalesItem.postMessage(data);
+            }
+        }
+    }
+
+
+    function html(json,message){
+        
+        var messageBody = JSON.parse(message);
+        var data = JSON.parse(json);
+        var context = '';
+        
+        selectCard = messageBody.customerData;
+        $("#cardCode").val(selectCard.cardCode);
+        $("#cardName").val(selectCard.cardName);
+        $("#searchID").val(messageBody.searchWord);
+        
+        fromDate = messageBody.fromDate;
+        toDate = messageBody.toDate;
+        $("#fromDate").val(fromDate);
+        $("#toDate").val(toDate);
+        
+        var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+        $.each(data, function(index, item) {
+            var name = item.ItemCode;
+            name  = name.replace(regExp, "").replace(" ","");
+            context += '         <dl class="sdList"> ';
+            context += '           <dt class="sdBtn">';
+            context += '                <dl class="lstCon lft">';
+            context += '                    <dt class="itemCode"> '+item.ItemCode +'</dt>';
+            context += '                   <dd class="itemName">'+ item.ItemName +'</dd>';
+            context += '                </dl>';
+            context += '                <dl class="lstCon rgt">';
+            context += '                    <dt>' + item.itemPrice.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '</dt>';
+            context += '                    <dd>1,841,000</dd>';
+            context += '                </dl>';
+            context += '            </dt>';
+            context += '             <dd class="sdCont item_detail"> ';
+            context += '                <div class="tbWrap">';
+            context += '                    <table id="'+name+'">';
+            context += '                       <tr>';
+            context += '                           <th>Date</th>';
+            context += '                           <th>InvNo</th>';
+            context += '                           <th>Q\'ty</th>';
+            context += '                           <th>OnHand</th>';
+            context += '                           <th>Price</th>';
+            context += '                           <th>Amt</th>';
+            context += '                       </tr>';
+<!--                $.each(data, function(index, item) {-->
+                context += '                       <tr>';
+                context += '                          <td>04/30/<br>2020</td>';
+                context += '                          <th>271883</th>';
+                context += '                          <th>1</th>';
+                context += '                          <td>1,841</td>';
+                context += '                          <td>10.99</td>';
+                context += '                          <td>10.99</td>';
+                context += '                       </tr>';
+<!--                });-->
+            context += '                     </table>';
+            context += '                   </div>';
+            context += '                 </dd>';
+            context += '               </dl>';
+           
+        });
+        context += "</table>";
+        $("#itemUl").html(context);
+        $(".item_detail").hide();
+    
+        if($("#searchID").val() != ''){
+            searchItem($("#searchID").val());
+        }
+
+    }
+
+    var searchItem = function(input){
+      var filter = ""
+      try{
+          filter = input.toUpperCase();
+      }catch{
+          console.log("ERROR");
+      }
+      
+        
+        $("#itemUl>dl").each(function(index){
+            var itemLi = $(this);
+            var itemCode = itemLi.children().children().children().eq(0);
+            var itemPrice = itemLi.children().children().children().eq(1);
+            var itemName = itemLi.children().children().children().eq(2);
+            var stockValue = itemLi.children().children().children().eq(3);
+             if(itemCode || itemPrice || itemName || stockValue){
+                var codeValue = itemCode.text();
+                var priceValue = itemPrice.text();
+                var nameValue = itemName.text();
+                var stokeValue = stockValue.text();
+                var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+                var itemTable = $(this).children().children().find(".itemCode").text().replace(" ","").replace(regExp,"");
+                
+                if(codeValue.toUpperCase().indexOf(filter) > -1 || priceValue.toUpperCase().indexOf(filter) > -1) {
+                    itemLi.attr('style','display:"";');
+                    $("#"+itemTable).css('display','');
+                    itemLi.next().attr('style','display:"";');
+                } else if(nameValue.toUpperCase().indexOf(filter) > -1 || stokeValue.toUpperCase().indexOf(filter) > -1) {
+                    itemLi.attr('style','display:"";');
+                    $("#"+itemTable).css('display','');
+                    itemLi.next().attr('style','display:"";');
+                } else {
+                    itemLi.attr('style','display:none;');
+                    $("#"+itemTable).html("");
+                    itemLi.next().attr('style','display:none');
+                }
+            }
+        });
+        $(".item_detail").hide();
+  }
+
+    // 전체보기 버튼
+    function allView(){
+        if(!flag){
+            $("#allview").text("All Hide");
+            $(".item_detail").show();
+            flag = true;
+        } else if(flag){
+            $("#allview").text("All View");
+            $(".item_detail").hide();
+            flag = false;
+        }
+    }
+    function page_refresh(){
+        $('#cardTable tr td input').val("");
+        $('#itemUl').html("");
+    }
+
+    function setDate(){
+       var today = new Date();
+       var year = today.getFullYear;
+       var month = today.getMonth;
+       var year = today.getDay;
+    }
+
+
+    </script>
+    <div id='header' class='hdWrap'></div>
+    <section>
+    <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+    <div class="conWrap dateParent sbWrap ept">
+              <div class="almWrap">
+                  <p>
+                      <img src="ico_alarm.png" alt="Network connection failed">
+                      Network connection failed.<br>
+                      (It can be different from the actual data.)
+                  </p>
+              </div>
+              <form method="post" name="quotationForm" id="quotationForm">
+              <div class="schTbWrap">
+                  <div id="popup_div"> </div>
+                  <table id="cardTable">
+                      <tr>
+                          <th>Customer</th>
+                          <td>
+                              <input type="text" class="ipt wtBtn" id="cardCode" name="cardCode"  readonly="readonly" placeholder="Customer">
+                              <button type="button" class ="btnIptSch" onclick="javascript:searchCustomerList();">Search</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th>Name</th>
+                          <td>
+                              <input type="text" name="cardName" id="cardName" class="ipt" readonly="readonly" placeholder="Name">
+                          </td>
+                      </tr>
+                      <tr>
+                          <th>Item</th>
+                          <td>
+                              <input type="text" id="searchID" class="ipt wtBtn" placeholder="Item">
+                              <button type="button" class ="btnIptSch off" onclick="javascript:searchItemList();">Search</button>
+                          </td>
+                      </tr>
+                      <tr>
+                          <th>Date</th>
+                             <td>
+                                 <div class="dateRgBox sg">
+                                     <input type="text" id="fromDate" class="val" readonly>
+                                 </div> ~
+                                 <div class="dateRgBox sg on"> <!--활성화시 class="on"추가-->
+                                     <input type="text" id="toDate" class="val" readonly>
+                                 </div>
+                             </td>
+                      </tr>
+                  </table>
+              </div>
+              </form>
+              <button type="button" class="allView sdAll"><span>All view</span></button>
+              <div id="itemUl" class="lstWrap sales sdWrap"></div>
+          </div>
+          <div class="fixBG"></div>
+    </section>
+</body>
+
+
+</html>

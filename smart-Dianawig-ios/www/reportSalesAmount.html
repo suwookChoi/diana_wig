@@ -1,0 +1,324 @@
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width">
+
+    <link rel="stylesheet" type="text/css" href="webfont.css"/>
+    <link rel="stylesheet" type="text/css" href="jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="common.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="daterangepicker.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+    <script type="text/javascript" src="style.js"></script>
+    <script type="text/javascript" src="header.js"></script>
+    <script>
+        var customer = new Object();
+        var selected_year = "";
+        var network = "";
+        var year = "";
+        jQuery("document").ready(function() {
+            // Header 설정
+            window.webkit.messageHandlers.headerHtml.postMessage("reportAmount");
+            year = $("#select_Year option:selected").val();
+            
+            if(network == "N") $(".almWrap").show();
+            else $(".almWrap").hide();
+
+            // 년도 설정
+            selectYear();
+            console.log($("#ui-id-1").text());
+            console.log($(".slctBoxJq > div > select > option:selected").text());
+            $(".slctBoxJq > div > select > option:selected").change(function(){
+            //$(document).on("change",".ui-selectmenu-text",function(event) {
+<!--                    showAlert("test",$(".slctBoxJq .designB").children().children().text());-->
+<!--                    $(".slctBoxJq .designB").children().find("#select_Year").change(function(){-->
+<!--                $(document).on("change", "#select_Year", function(event) {-->
+                    showAlert($(this).children().find("option:selected").text());
+<!--                });-->
+                
+            });
+<!--       $(document).on("change", ".designB .select_Year", function(event) {-->
+<!--                if($("#cardCode").val() == null || $("#cardCode").val() == ""){-->
+<!--                    showAlert("Notice","Please select a Customer.");-->
+<!--                }else{-->
+<!--                    var date = $("#select_Year option:selected ").val();-->
+<!--                    getCustomerSaleAmountData(customer,date);-->
+<!--                }-->
+<!--            });-->
+<!--            $(document).on("change", ".slctBoxJq .designB #select_Year .opt", function(event) {-->
+<!--                if($("#cardCode").val() == null || $("#cardCode").val() == ""){-->
+<!--                    showAlert("Notice","Please select a Customer.");-->
+<!--                }else{-->
+<!--                    var date = $("#select_Year option:selected ").val();-->
+<!--                    getCustomerSaleAmountData(customer,date);-->
+<!--                }-->
+<!--            });-->
+        });
+        function done(){
+            if($("#cardCode").val() == null || $("#cardCode").val() == ""){
+                showAlert("Notice","Please select a Customer.");
+            }else{
+                var date =$(".slctBoxJq > div > select > option:selected").text();
+                showAlert("test",date);
+                getCustomerSaleAmountData(customer,date);
+            }
+        }
+        function headerHtml(menu,id,network_stat){
+            network = network_stat;
+            header_html("reportSalesAmount",id,"Y");
+            $(".reportAmount").parents().parents().children(".li button").css({"color": ""});
+            $(".reportAmount").css({"color": "#d94a67"});
+            $(".report_li").css({"color": "#d94a67"});
+        }
+
+    
+    
+    // 사용자 데이터
+        function searchCustomerList() {
+            window.webkit.messageHandlers.moveCustomer.postMessage(JSON.stringify(customer));
+        }
+
+        function customerHtml(data) {
+            var cardData = JSON.parse(data);
+            $("#cardCode").val(cardData.cardCode);
+            $("#cardName").val(cardData.cardName);
+            customer = cardData;
+        }
+    
+        function selectYear(){
+            var context = "";
+            var date = new Date();
+            var year = date.getFullYear();
+        
+            context += "<option selected>Select Year</option>"
+            for(var i=year, j=0; j<5;i--,j++){
+                context += "<option class='opt' value='"+i+"'>"+i+"</option>";
+            }
+            
+            $(".select_Year").html(context);
+        };
+        
+   
+        function getCustomerSaleAmountData(selectCard,selectYear){
+            var data = {"customerData":selectCard,"yearData":selectYear};
+            window.webkit.messageHandlers.getSalesData.postMessage(data);
+        }
+
+        function html(json,message){
+            $("#itemtable").html("");
+            var context = "";
+            var messageData = JSON.parse(message);
+            
+            itemList = JSON.parse(json);
+            selected_year = messageData.yearData;
+            customer = messageData.customerData;
+            context = drawSalesItemTable(itemList);
+            
+            $("#itemtable").html(context);
+        }
+    
+        function drawSalesItemTable(item){
+            var year_html ="";
+
+            for(var i=0;i<3;i++){
+                year_html += '<th colspan="3">'+(Number(selected_year)-i)+'</th>';
+            }
+            
+            $("#year_3th").html(year_html);
+            
+            var context = "";
+            context +=' <colgroup>';
+            context +='    <col style="width:100px">';
+            context +='    <col style="width:100px">';
+            context +='    <col style="width:100px">';
+            context +='    <col style="width:100px">';
+            context +=' <col style="width:100px">';
+            context +='   <col style="width:100px">';
+            context +='    <col style="width:100px"> ';
+            context +='   <col style="width:100px">';
+            context +='   <col style="width:100px"> ';
+            context +=' </colgroup> ';
+            context +='     <tr> ';
+            context +='       <td class="str">38,955</td> ';
+            context +='       <td class="str">3,789</td> ';
+            context +='       <td class="tcR str">42,744</td> ';
+            context +='       <td class="str">38,955</td> ';
+            context +='       <td class="str">3,789</td> ';
+            context +='       <td class="tcR str">42,744</td> ';
+            context +='       <td class="str">38,955</td>';
+            context +='       <td class="str">3,789</td>';
+            context +='       <td class="tcR str">42,744</td> ';
+            context +='      </tr> ';
+            // 임시 데이터
+            for(var i=0;i<12;i++){
+                context +='     <tr> ';
+                context +='       <td class="str">38,955</td> ';
+                context +='       <td class="str">3,789</td> ';
+                context +='       <td class="tcR str">42,744</td> ';
+                context +='       <td class="str">38,955</td> ';
+                context +='       <td class="str">3,789</td> ';
+                context +='       <td class="tcR str">42,744</td> ';
+                context +='       <td class="str">38,955</td>';
+                context +='       <td class="str">3,789</td>';
+                context +='       <td class="tcR str">42,744</td> ';
+                context +='      </tr> ';
+            }
+            return context;
+        }
+    </script>
+</head>
+
+<body>
+    <div id='header' class='hdWrap'></div>
+    <section>
+        <div class="popWrap" id="popWrap_div" style="text-align: center;"></div>
+         <div class="conWrap">
+             <div class="almWrap">
+                <p>
+                    <img src="ico_alarm.png" alt="Network connection failed">
+                    Network connection failed.<br>
+                    (It can be different from the actual data.)
+                </p>
+            </div>
+            <form method="post" name="quotationForm" id="quotationForm">
+                <div class="schTbWrap">
+                    <table id="cardTable">
+                        
+                        <tr>
+                            <th>Customer</th>
+                            <td>
+                                <input type="text" name="cardCode" id="cardCode"  class="ipt wtBtn" readonly="readonly" placeholder="Customer">
+                                <button type="button" class ="btnIptSch" onclick="javascript:searchCustomerList();">Search</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>
+                                <input type="text" name="cardName" id="cardName" class="ipt" readonly="readonly" placeholder="Name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Year</th>
+                            <td>
+                                <div class="slctBoxJq style2">
+                                   <div class="designB">
+                                        <select class="select_Year" name="1"> </select>
+                                   </div>
+                               </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+            <div class="saCon">
+                <div class="tbWrap scrWrap">
+                    <div class="ttl scrHWrapL">
+                        <div class="scrHttl">
+                            <table>
+                                <tr>
+                                    <th class="year">
+                                        <span class="y">Y</span>
+                                        <span class="m">M</span>
+                                    </th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="scrHtxt">
+                            <table class="scrVs">
+                                <colgroup>
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                    <col style="width:100px">
+                                </colgroup>
+                                <tr id= "year_3th">
+                                    
+                                </tr>
+                                <tr>
+                                    <th>Hair</th>
+                                    <th>G/M</th>
+                                    <th class="tcR str">Total</th>
+                                    <th>Hair</th>
+                                    <th>G/M</th>
+                                    <th class="tcR str">Total</th>
+                                    <th>Hair</th>
+                                    <th>G/M</th>
+                                    <th class="tcR str">Total</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="txt scrHWrapX">
+                        <div class="scrHttl">
+                            <table>
+                                <colgroup>
+                                    <col style="width:79px">
+                                </colgroup>
+                                <tr>
+                                    <th class="tcR str">Total</th>
+                                </tr>
+                                <tr>
+                                    <th>Jan</th>
+                                </tr>
+                                <tr>
+                                    <th>Feb</th>
+                                </tr>
+                                <tr>
+                                    <th>Mar</th>
+                                </tr>
+                                <tr>
+                                    <th>Apr</th>
+                                </tr>
+                                <tr>
+                                    <th>May</th>
+                                </tr>
+                                <tr>
+                                    <th>Jun</th>
+                                </tr>
+                                <tr>
+                                    <th>Jul</th>
+                                </tr>
+                                <tr>
+                                    <th>Aug</th>
+                                </tr>
+                                <tr>
+                                    <th>Sep</th>
+                                </tr>
+                                <tr>
+                                    <th>Oct</th>
+                                </tr>
+                                <tr>
+                                    <th>Nov</th>
+                                </tr>
+                                <tr>
+                                    <th>Dec</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="scrHtxt">
+                            <table class="scrVs" id="itemtable">
+                              
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixBG"></div>
+        <div class="btnWrap">
+             <button class="btnDn" onclick="javascript:done()">Done</button>
+        </div>
+    </section>
+</body>
+
+</html>
