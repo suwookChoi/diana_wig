@@ -45,8 +45,6 @@ class SQLiteController: UIViewController, WKUIDelegate
     }
     
     func selectSqlite(sqlSelect: String){
-        print("=== selectSqlite 진입 ===")
-        print(sqlSelect)
         
         let database : FMDatabase? = FMDatabase(path: dbPath as String)
                 
@@ -74,9 +72,6 @@ class SQLiteController: UIViewController, WKUIDelegate
 
        }
     func selectOITM(sqlSelect: String){
-        print("=== selectSqlite 진입 ===")
-        print(sqlSelect)
-        
         let database : FMDatabase? = FMDatabase(path: dbPath as String)
                 
         if let db = database {
@@ -104,8 +99,6 @@ class SQLiteController: UIViewController, WKUIDelegate
        }
     
     func createSQLite(webview: WKWebView) {
-        print(">>> SQLiteController createSQLite <<<")
-        print("222222222")
         let dbData = commonController.getDBData()
         let mssqlIP = dbData["mssqlIP"] as! String
         let mssqlName = dbData["mssqlName"] as! String
@@ -315,14 +308,7 @@ class SQLiteController: UIViewController, WKUIDelegate
                                         
                                         var preEnt : Int = 0
                                         preEnt = Int(rs.int(forColumn: "DocEntry"))
-                                        
-    //                                    let sqlCode = rs.int(forColumn: "SlpCode")
-    //                                    let CardCode = rs.object(forColumn: "CardCode")!
-    //                                    let CardName = rs.object(forColumn: "CardName")!
-    //                                    let Address = rs.object(forColumn: "Address")!
-    //                                    let DocDate = rs.object(forColumn: "DocDate")!
-    //                                    let PaidSum = rs.int(forColumn: "PaidSum")
-                                                                 
+             
                                          let sqlCode = rs.int(forColumn: "SlpCode") == nil ? -1 : rs.int(forColumn: "SlpCode")
                                          let CardCode : String = rs.object(forColumn: "CardCode") == nil ? "" : rs.object(forColumn: "CardCode")! as! String
                                          let CardName : String = rs.object(forColumn: "CardName") == nil ? "" : rs.object(forColumn: "CardName")! as! String
@@ -389,7 +375,6 @@ class SQLiteController: UIViewController, WKUIDelegate
                 
                 client.execute("SELECT DocEntry, DocNum, SlpCode, Flags, CardCode, CardName, Address, CONVERT(CHAR(10), DocDate, 23) AS DocDate, PaidSum FROM OQUT", completion: { (_ results: ([Any]?)) in
                     guard (results != nil) else {
-                        print("fail >>>>>>>>>>>> OQUT Insert")
                         firstChk = false
                         client.disconnect()
                         return
@@ -760,57 +745,6 @@ class SQLiteController: UIViewController, WKUIDelegate
                                    self.move(webview: webview, fileExistFlag: fileExistFlag, firstChk: firstChk)
                                })
 
-//                client.execute("SELECT empID, lastName ,firstName ,middleName ,sex ,status FROM OHEM ", completion: { (_ results: ([Any]?)) in
-//                    guard (results != nil) else {
-//                        print("fail >>>>>>>>>>>> OHEM Insert")
-//                        firstChk = false
-//                        client.disconnect()
-//
-//                        self.move(webview: webview, fileExistFlag: fileExistFlag, firstChk: firstChk)
-//
-//                        return
-//                    }
-//
-//                    db.open()
-//
-//                    let tableYN = db.executeQuery("SELECT COUNT(*) AS CNT FROM SQLITE_MASTER WHERE NAME = 'OHEM'", withArgumentsIn: [])
-//                    if tableYN?.next() == true {
-//                        if tableYN?.int(forColumn: "CNT") == 1 {
-//                           db.executeUpdate("DELETE FROM OHEM", withArgumentsIn: [])
-//                       }
-//                    }
-//
-//                    for table in results as! [[[String:AnyObject]]] {
-//                        for row in table {
-//
-//                            let empID = row["empID"] as? String
-//                            let lastName = row["lastName"] as? String
-//                            let firstName = row["firstName"] as? String
-//                            let middleName = row["middleName"] as? String
-//                            let sex = row["sex"] as? String
-//                            let status = row["status"] as? String
-//
-//                            var sqlInsert : String = "INSERT INTO OITM (" +
-//                                                        "empID, lastName, firstName, " +
-//                                                        "middleName, sex, status" +
-//                                                    ") " +
-//                                                    "VALUES ("
-//                            if empID != nil {sqlInsert += "'\(empID!)', "} else {sqlInsert += "null, "}
-//                            if lastName != nil {sqlInsert += "'\(lastName!)', "} else {sqlInsert += "null, "}
-//                            if firstName != nil {sqlInsert += "'\(firstName!)', "} else {sqlInsert += "null, "}
-//                            if middleName != nil {sqlInsert += "'\(middleName!)', "} else {sqlInsert += "null, "}
-//                            if status != nil {sqlInsert += "'\(status!)', "} else {sqlInsert += "null, "}
-//                            if sex != nil {sqlInsert += "'\(sex!)' "} else {sqlInsert += "null"}
-//                            sqlInsert += ")"
-//
-//                             db.executeUpdate(sqlInsert, withArgumentsIn: [])
-//                        }
-//                    }
-//                    db.close()
-//                    client.disconnect()
-//
-//                    self.move(webview: webview, fileExistFlag: fileExistFlag, firstChk: firstChk)
-//                })
             }
             print("TABLE 생성 성공")
         }else{
